@@ -3,6 +3,7 @@
 
 **Document status:** Working specification  
 **Purpose:** This file is the source of truth for building the website with Codex. Update it whenever the game rules or product requirements change.
+**Rules updated:** 2026-07-12
 
 ---
 
@@ -72,7 +73,15 @@ One administrator should be able to enter or correct results.
 | 2 | Sweden |
 | 1 | Scotland, Iran, Ivory Coast |
 
-The initial data may be imported manually or seeded into the database.
+Participant display order is:
+
+1. Lyla (L)
+2. Shiyu (S)
+3. Ivy (Y)
+4. Xun (X)
+5. Houji & Yujin (H&J)
+
+The initial data may be imported manually or seeded into the database. Country records use FIFA three-letter country codes. All 48 tournament countries must be represented, including countries that were not drafted. Draft ownership and value belong in a separate `draft_picks` entity rather than directly on a country record.
 
 ---
 
@@ -87,23 +96,25 @@ Stars(t) = (6 - log2(R(t))) × V(t)
 Where:
 
 - `V(t)` is the country's draft value: 1, 2, or 3.
-- `R(t)` is the country's best current finishing-position threshold, determined by the furthest stage it has reached.
+- `R(t)` is the country's best current finishing-position threshold, determined by the furthest stage for which it has officially qualified.
 - Stars shown in the app are the country's **current accumulated Stars**, not a sum of the totals displayed at every previous stage.
 
 ### Standard stage values
 
 | Furthest stage/result reached | R | Accumulated Stars |
 |---|---:|---:|
-| Did not reach Top 32 | — | 0 |
-| Top 32 | 32 | `1 × V` |
-| Top 16 | 16 | `2 × V` |
-| Top 8 | 8 | `3 × V` |
-| Top 4 / fourth place | 4 | `4 × V` |
+| Did not reach the Round of 32 | — | 0 |
+| Round of 32 | 32 | `1 × V` |
+| Round of 16 | 16 | `2 × V` |
+| Quarterfinal / final 8 | 8 | `3 × V` |
+| Semifinal / final 4 / fourth place | 4 | `4 × V` |
 | Third place | 3 | `(6 - log2(3)) × V`, approximately `4.4150375 × V` |
 | Runner-up | 2 | `5 × V` |
 | Champion | 1 | `6 × V` |
 
 ### Advancement behavior
+
+A country receives the Stars for a stage as soon as it officially qualifies for that stage. “Round of 32” is the technical identifier for the scoring threshold sometimes described informally as “Top 32.” Officially qualifying from the group stage gives a country Round-of-32 status. Winning a Round-of-32 match immediately gives Round-of-16 status. Winning a quarterfinal immediately gives semifinal/final-4 status.
 
 For normal knockout advancement, a country gains an additional number of Stars equal to its draft value.
 
@@ -111,19 +122,19 @@ Example for a Value 3 country:
 
 | Current result | Accumulated Stars | Increase |
 |---|---:|---:|
-| Top 32 | 3 | +3 |
-| Top 16 | 6 | +3 |
-| Top 8 | 9 | +3 |
-| Top 4 | 12 | +3 |
+| Round of 32 | 3 | +3 |
+| Round of 16 | 6 | +3 |
+| Quarterfinal / final 8 | 9 | +3 |
+| Semifinal / final 4 | 12 | +3 |
 | Runner-up | 15 | +3 |
 | Champion | 18 | +3 |
 
 ### Third-place exception
 
-A semifinalist starts with `4 × V` Stars.
+A semifinalist starts with `4 × V` Stars. Both losing semifinalists initially remain at this multiplier.
 
-- The third-place winner moves to `(6 - log2(3)) × V`.
-- The fourth-place country remains at `4 × V`.
+- After the third-place match is completed, its winner moves to `(6 - log2(3)) × V`.
+- The third-place match loser remains at `4 × V`, the Top-4/fourth-place multiplier.
 - The third-place bonus is therefore `(2 - log2(3)) × V`, approximately `0.4150375 × V`.
 
 ### Fantasy-team total
@@ -138,6 +149,8 @@ Calculations should use full numerical precision internally. The interface shoul
 
 Golden Goal points equal the total official match goals scored by all countries drafted by a participant.
 
+Only matches with `status = completed` contribute to Golden Goal totals or official fantasy standings. Scheduled, live, postponed, and cancelled matches may be displayed but do not affect calculated totals.
+
 Count:
 
 - Regulation-time goals
@@ -149,13 +162,15 @@ Do not count:
 
 - Penalty-shootout kicks
 
+`home_goals` and `away_goals` mean the official match score after regulation and, when applicable, extra time, excluding penalty-shootout kicks. Store whether the match went to extra time in `went_to_extra_time`.
+
 For a match decided by shootout, store these separately:
 
-- Score after extra time
+- `home_goals` and `away_goals`, representing the official score after regulation and any extra time
 - Shootout score
 - Advancing country
 
-Only the score after extra time contributes to Golden Goal totals.
+Only `home_goals` and `away_goals` from completed matches contribute to Golden Goal totals.
 
 ---
 
@@ -190,7 +205,7 @@ Do not resolve ties with an unapproved secondary tiebreaker.
 
 ## 6.1 Group-Stage Standings Rules
 
-The app should calculate group standings automatically from entered match results.
+The app should calculate group standings automatically from completed match results. Scheduled, live, postponed, and cancelled matches do not affect standings, progression, elimination, or official fantasy standings.
 
 Use:
 
@@ -203,7 +218,7 @@ Use:
 - Matches played
 - Wins, draws, and losses
 
-For the MVP, the administrator may manually correct final group order or qualification status if official FIFA tiebreaking produces a different order than the simplified calculation.
+Calculated standings are the default. For the MVP, the administrator may store a manual final group rank or qualification override if official FIFA tiebreaking produces a different order than the simplified calculation. Every override must include a reason. The interface must clearly indicate when an official/manual override is being used.
 
 Show all 48 countries across Groups A through L. Drafted countries should be visually highlighted and labeled with their fantasy owner.
 
@@ -336,6 +351,10 @@ The administrator can:
 - Update tournament stage
 - Review the effects before saving
 
+Match statuses are `scheduled`, `live`, `completed`, `postponed`, and `cancelled`. Only completed matches affect official calculations.
+
+Every completed knockout match must identify an advancing country, and that country must be either the home or away country. Group-stage matches may end in a draw and do not use an advancing country.
+
 Saving a result should automatically:
 
 - Update country goal totals
@@ -348,7 +367,7 @@ Saving a result should automatically:
 - Update the bracket
 - Update the last-modified timestamp
 
-Manual corrections must trigger a complete recalculation so totals do not get counted twice.
+Manual corrections must trigger a complete recalculation from canonical records so totals do not get counted twice. Administrator match changes and corrections must also create an audit-log entry.
 
 ---
 
@@ -359,12 +378,14 @@ Manual corrections must trigger a complete recalculation so totals do not get co
 - No account required
 - Read-only access
 - Can see all public pages
+- Public tournament data in Supabase is publicly readable through row-level security policies.
 
 ### Administrator
 
 - One administrator account for the MVP
 - Can enter and correct tournament information
 - Authentication credentials must never be stored in client-side code
+- Administrator authorization must use the authenticated Supabase user ID in an administrator allowlist. A browser-side email check is not authorization.
 
 A second administrator can be added later.
 
@@ -416,6 +437,10 @@ Constraints:
 - Avoid unnecessary libraries
 - Include clear setup instructions
 
+Framework-independent game logic should live under `src/domain`, organized at minimum into scoring, goals, ranking, group standings, progression, and match validation modules.
+
+For mobile usability, use cards and expandable sections where appropriate. Tables and the knockout bracket may scroll horizontally. Ownership, qualification, and elimination must never be communicated using color alone.
+
 Codex may recommend a different stack only if it gives a concrete reason and preserves the free, simple, mobile-friendly requirements.
 
 ---
@@ -424,47 +449,114 @@ Codex may recommend a different stack only if it gives a concrete reason and pre
 
 Codex should refine this schema before implementing it.
 
+### Canonical and derived data
+
+Canonical stored data consists of match records, participants, countries, draft picks, tournament settings, and explicit administrator overrides. Administrator match changes and corrections are also recorded in an audit log.
+
+Country goals, participant goals, Stars, rankings, progression, elimination, and active-country counts are derived. They must be recalculated from canonical data and must not be stored as mutable totals. Only completed matches participate in these calculations.
+
 ### Participant
 
 - `id`
 - `name`
+- `abbreviation`
 - `display_order`
+- `created_at`
+- `updated_at`
 
 ### Country
 
 - `id`
 - `name`
-- `code`
+- `fifa_code`: unique FIFA three-letter code
+- `group_code`
 - `flag_url` or local flag reference, optional
+- `created_at`
+- `updated_at`
+
+All 48 tournament countries must have country records, including undrafted countries. Ownership, draft value, progression, and elimination do not belong as mutable fields on the country.
+
+### Draft Pick
+
+- `id`
 - `participant_id`
-- `draft_value`
-- `furthest_stage`
-- `is_eliminated`
+- `country_id`, unique because a country has at most one fantasy owner
+- `draft_value`: 1, 2, or 3
+- `created_at`
+- `updated_at`
 
 ### Match
 
 - `id`
+- `match_number`, unique
 - `stage`
-- `home_country_id`
-- `away_country_id`
-- `home_goals`
-- `away_goals`
+- `home_country_id`, nullable while a future bracket slot is unresolved
+- `away_country_id`, nullable while a future bracket slot is unresolved
+- `home_source_match_id`, nullable reference to the match that supplies the future home slot
+- `away_source_match_id`, nullable reference to the match that supplies the future away slot
+- `home_goals`: official score after regulation and, when applicable, extra time; excludes shootout kicks
+- `away_goals`: official score after regulation and, when applicable, extra time; excludes shootout kicks
+- `went_to_extra_time`
 - `home_shootout_goals`, nullable
 - `away_shootout_goals`, nullable
 - `advancing_country_id`, nullable
 - `scheduled_at`, nullable
-- `status`: scheduled, live, completed
+- `status`: scheduled, live, completed, postponed, or cancelled
 - `source`: manual or external
 - `external_match_id`, nullable
+- `created_at`
 - `updated_at`
+- `updated_by`, nullable for system-created records
+
+Every completed knockout match must identify an advancing country that is either its home or away country. Completed group matches may end in a draw and do not use `advancing_country_id`. Only completed matches affect calculations.
+
+### Group-Stage Override
+
+- `id`
+- `group_code`
+- `country_id`
+- `final_rank`, nullable
+- `qualified`, nullable
+- `reason`, required
+- `created_at`
+- `updated_at`
+- `updated_by`
+
+Calculated group standings are the default. Overrides are canonical exceptions used only when the simplified calculation differs from official FIFA ordering, and the UI must label their use.
 
 ### Tournament Settings
 
 - `current_stage`
-- `last_updated_at`
+- `last_updated_at`: the most recent successful mutation of tournament data, not a deployment, page view, or login
 - `rules_version`
+- `rules_updated_at`
+- `created_at`
+- `updated_at`
+- `updated_by`
 
-Derived values such as total Stars and total goals should preferably be computed from canonical country and match data rather than stored redundantly, unless caching becomes necessary.
+### Administrator Allowlist
+
+- `user_id`: authenticated Supabase user ID
+- `created_at`
+- `updated_at`
+- `updated_by`, where applicable
+
+Database write policies must authorize against the authenticated Supabase user ID in this allowlist, not against an email check performed in the browser.
+
+### Audit Log
+
+- `id`
+- `actor_user_id`
+- `entity_type`
+- `entity_id`
+- `action`
+- `before_data`
+- `after_data`
+- `created_at`
+
+At minimum, every administrator match creation, edit, and correction must create an audit entry containing the before and after state where applicable.
+
+Explicit progression overrides may be added only as canonical, reasoned exceptions if an official tournament decision cannot be represented by the completed match and group-override records. They must not become mutable scoring counters.
 
 ---
 
@@ -484,10 +576,10 @@ rankWithTies(entries)
 
 Required tests:
 
-1. Value 3 at Top 32 returns 3 Stars.
-2. Value 3 at Top 16 returns 6 Stars.
-3. Value 1 at Top 8 returns 3 Stars.
-4. Value 2 at Top 4 returns 8 Stars.
+1. Value 3 at Round of 32 returns 3 Stars.
+2. Value 3 at Round of 16 returns 6 Stars.
+3. Value 1 at quarterfinal/final-8 status returns 3 Stars.
+4. Value 2 at semifinal/final-4 status returns 8 Stars.
 5. Value 3 in third place returns approximately 13.2451125 Stars.
 6. Value 3 in fourth place returns 12 Stars.
 7. Value 2 as runner-up returns 10 Stars.
@@ -497,7 +589,21 @@ Required tests:
 11. Two tied leaders are ranked 1, 1, and the next participant is ranked 3.
 12. Editing a completed match recalculates totals without double-counting.
 
-Use a small tolerance for floating-point assertions.
+Expand test coverage beyond these minimum cases to cover:
+
+- Every draft value at every scoring stage
+- Multiple tie configurations, including ties below first place
+- Repeated match corrections and replacement of prior scores
+- Completed, scheduled, live, postponed, and cancelled match behavior
+- Shootouts and extra-time matches
+- Semifinal advancement and both losing semifinalists before the third-place match
+- Third-place winner and fourth-place loser behavior
+- Runner-up and champion behavior after the final
+- Valid and invalid knockout advancing countries
+- Group-stage draws and group-order/qualification overrides
+- Floating-point comparisons and ranking equality
+
+Use a small documented tolerance for floating-point assertions.
 
 ---
 
@@ -509,7 +615,8 @@ The MVP is ready when:
 - Public pages require no login.
 - The five fantasy teams and drafted countries are seeded.
 - The administrator can enter and edit a match.
-- Scores after extra time and shootout scores are stored separately.
+- Official match scores and shootout scores are stored separately, with `went_to_extra_time` recorded.
+- Only completed matches affect official calculations.
 - Golden Goal totals update correctly.
 - Countries advance or become eliminated correctly.
 - Accumulated Stars update correctly.
@@ -517,6 +624,7 @@ The MVP is ready when:
 - Ties use standard competition ranking.
 - The dashboard, awards, team details, group-stage tournament view, knockout bracket, rules, front page, and admin page exist.
 - Refreshing the site preserves data.
+- Administrator match changes and corrections are recorded in the audit log.
 - Calculation tests pass.
 - Linting and type checking pass.
 - Setup and deployment steps are documented.
@@ -586,7 +694,7 @@ Run all available checks and report:
 ```text
 Read PRODUCT_SPEC.md.
 
-Implement the game calculations as pure TypeScript functions, independent of the UI and database.
+Implement the game calculations as pure TypeScript functions under `src/domain`, independent of the UI and database. Organize the domain logic into scoring, goals, ranking, group standings, progression, and match validation modules.
 
 Include:
 - Country Stars by draft value and furthest stage
@@ -595,6 +703,7 @@ Include:
 - Standard competition ranking for ties
 - Third-place scoring
 - Shootout-goal exclusion
+- Completed-match-only calculation behavior
 
 Add comprehensive automated tests, including every required test listed in PRODUCT_SPEC.md.
 
@@ -641,14 +750,15 @@ Read PRODUCT_SPEC.md and inspect the current typed local data model.
 Design and implement the Supabase database migration and seed data.
 
 Requirements:
-- Normalize participants, countries, matches, and tournament settings.
+- Normalize participants, all 48 countries, draft picks, matches, group-stage overrides, tournament settings, the administrator allowlist, and the audit log.
 - Keep shootout goals separate from regulation/extra-time goals.
+- Include `went_to_extra_time`, `match_number`, and unresolved bracket source-match references.
 - Preserve enough data for safe match corrections.
 - Include constraints that prevent invalid draft values and obviously invalid scores.
 - Seed the five participants and drafted countries.
 - Add row-level security policies:
   - Public users can read public tournament data.
-  - Only authenticated administrators can write.
+  - Only authenticated Supabase user IDs present in the administrator allowlist can write.
 - Do not place service-role credentials in browser code.
 - Add setup documentation and environment-variable placeholders.
 
@@ -683,6 +793,7 @@ The administrator must be able to:
 - Create a scheduled match
 - Enter or edit a completed match
 - Store score after regulation/extra time
+- Record whether the match went to extra time
 - Store shootout score separately
 - Select the advancing country
 - Select the tournament stage
@@ -693,8 +804,11 @@ Validation requirements:
 - Goals cannot be negative.
 - Shootout values are optional and do not count toward Golden Goal.
 - A knockout match must have a valid advancing country.
+- The advancing-country requirement applies to completed knockout matches, not group-stage matches.
 - The advancing country must be one of the two participants in the match.
 - Corrections must recalculate from canonical match data and never double-count goals or Stars.
+- Scheduled, live, postponed, and cancelled matches must not affect official calculations.
+- Match creations, edits, and corrections must create audit-log entries.
 
 Add tests for validation and correction behavior.
 
@@ -733,9 +847,9 @@ Run the complete test, lint, type-check, and production-build commands. Provide 
 
 ---
 
-## 14. Decisions Still Open
+## 14. Decision Record and Open Items
 
-These do not block the initial scaffold, but should be resolved before final deployment:
+### Approved decisions
 
 - Official app/game title  
   **Decision: Fantasy FIFA World Cup 2026.**
@@ -743,16 +857,21 @@ These do not block the initial scaffold, but should be resolved before final dep
   **Decision: 2026 FIFA World Cup.**
 - Whether group-stage goals count toward Golden Goal  
   **Decision: YES. All tournament match goals count toward Golden Goal (excluding penalty shootout kicks).**
-- Whether countries that fail to reach Top 32 receive zero Stars  
-  **Decision: YES. Countries eliminated before reaching the Top 32 receive zero Stars.**
+- Whether countries that fail to reach the Round of 32 receive zero Stars
+  **Decision: YES. Countries eliminated before qualifying for the Round of 32 receive zero Stars.**
 - Whether the tournament page includes group-stage tables  
   **Decision: YES. The MVP includes all 12 World Cup groups and all 48 countries, with drafted countries highlighted and labeled by owner. It also includes the knockout bracket because all tournament goals count toward Golden Goal.**
-- Whether the front page is public on the open internet or protected by an unlisted URL  
-  **Current assumption: public read-only via shared URL.**
 - Administrator email/account  
   **Decision: Only Shiyu will have administrator access, using `liangshiyu23@outlook.com` for Supabase authentication.**
-- Desired domain name, if any
 - Participant display names  
-  **Decision:** Lyla (L), Shiyu (S), Xun (X), Ivy (Y), and Houji & Yujin (H&J).
+  **Decision:** Lyla (L), Shiyu (S), Ivy (Y), Xun (X), and Houji & Yujin (H&J), in that display order.
+
+### Remaining open items
+
+These do not block the initial scaffold, but should be resolved before final deployment:
+
+- Whether the publicly readable site should be discoverable on the open internet or shared only through an unlisted URL
+- Desired custom domain name, if any
+- The authoritative source and import process for the final 48-country, group, match-number, and schedule seed data
 
 Record approved decisions in this file rather than leaving them only in chat history.
