@@ -1,12 +1,61 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-50: #fff4e8;
+  --color-brand-100: #ffe4c2;
+  --color-brand-300: #e9a268;
+  --color-brand-500: #bf5700;
+  --color-brand-600: #a84d00;
+  --color-brand-700: #8f4100;
+  --color-brand-800: #713400;
+  --color-brand-950: #3d1b00;
+}
+
 :root {
   color-scheme: light;
+  --brand: #bf5700;
+  --brand-hover: #8f4100;
+  --brand-soft: #fff4e8;
+  --brand-selection: #ffe4c2;
+  --brand-ink: #3d1b00;
 }
 
 body {
-  background: #f8fafc;
+  background: #f4f7f6;
   color: #0f172a;
+}
+
+::selection {
+  background: var(--brand-selection);
+  color: var(--brand-ink);
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: 0.5rem;
+  background: #0f172a;
+  padding: 0.75rem 1rem;
+  color: white;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.table-scroll {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+}
+.numeric {
+  font-variant-numeric: tabular-nums;
 }
 
 a,

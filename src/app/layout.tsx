@@ -19,10 +19,24 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen antialiased">
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <SiteHeader />
-        <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <main
+          id="main-content"
+          className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8"
+        >
           {children}
         </main>
+        <footer className="border-t border-slate-200 bg-white">
+          <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-6 text-sm text-slate-500 sm:px-6 lg:px-8">
+            <p>
+              Fantasy FIFA World Cup 2026 · A private competition among friends.
+            </p>
+            <p>Official tournament data is added only when it is available.</p>
+          </div>
+        </footer>
       </body>
     </html>
   );
