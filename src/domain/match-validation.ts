@@ -67,6 +67,19 @@ export function validateMatch(match: DomainMatch): ValidationIssue[] {
     });
   }
 
+  if (
+    hasHomeShootout &&
+    hasAwayShootout &&
+    match.homeGoals !== null &&
+    match.awayGoals !== null &&
+    match.homeGoals !== match.awayGoals
+  ) {
+    issues.push({
+      code: "shootout_on_non_draw",
+      message: "A shootout is only valid when the match score is drawn.",
+    });
+  }
+
   if (!isCompletedMatch(match)) {
     if (match.advancingCountryId !== null) {
       issues.push({
@@ -127,6 +140,51 @@ export function validateMatch(match: DomainMatch): ValidationIssue[] {
         field: "advancingCountryId",
         message: "The advancing country must belong to the match.",
       });
+    }
+
+    if (
+      match.homeGoals !== null &&
+      match.awayGoals !== null &&
+      match.homeCountryId !== null &&
+      match.awayCountryId !== null &&
+      match.advancingCountryId !== null
+    ) {
+      const scoreWinner =
+        match.homeGoals > match.awayGoals
+          ? match.homeCountryId
+          : match.awayGoals > match.homeGoals
+            ? match.awayCountryId
+            : null;
+      const shootoutWinner =
+        match.homeShootoutGoals !== null &&
+        match.awayShootoutGoals !== null &&
+        match.homeShootoutGoals !== match.awayShootoutGoals
+          ? match.homeShootoutGoals > match.awayShootoutGoals
+            ? match.homeCountryId
+            : match.awayCountryId
+          : null;
+
+      if (scoreWinner !== null && match.advancingCountryId !== scoreWinner) {
+        issues.push({
+          code: "advancing_country_did_not_win",
+          field: "advancingCountryId",
+          message: "The advancing country must be the match winner.",
+        });
+      } else if (scoreWinner === null && shootoutWinner === null) {
+        issues.push({
+          code: "tied_knockout_without_winner",
+          message: "A tied knockout match requires a valid shootout winner.",
+        });
+      } else if (
+        shootoutWinner !== null &&
+        match.advancingCountryId !== shootoutWinner
+      ) {
+        issues.push({
+          code: "advancing_country_lost_shootout",
+          field: "advancingCountryId",
+          message: "The advancing country must be the shootout winner.",
+        });
+      }
     }
   }
 

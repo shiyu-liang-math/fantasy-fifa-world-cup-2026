@@ -117,6 +117,32 @@ describe("match validation", () => {
     ).toContain("invalid_advancing_country");
   });
 
+  it("requires the advancing country to win the score or shootout", () => {
+    expect(
+      codes(
+        match({
+          stage: "quarterfinal",
+          homeGoals: 2,
+          awayGoals: 1,
+          advancingCountryId: "away",
+        }),
+      ),
+    ).toContain("advancing_country_did_not_win");
+    expect(
+      codes(
+        match({
+          stage: "quarterfinal",
+          homeGoals: 2,
+          awayGoals: 1,
+          wentToExtraTime: true,
+          homeShootoutGoals: 4,
+          awayShootoutGoals: 3,
+          advancingCountryId: "home",
+        }),
+      ),
+    ).toContain("shootout_on_non_draw");
+  });
+
   it("allows unresolved scheduled matches but rejects premature advancement", () => {
     expect(
       validateMatch(

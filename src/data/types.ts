@@ -83,6 +83,7 @@ export type MatchRecord = DomainMatch &
 
 export type GroupQualificationOverrideRecord = Readonly<{
   id: string;
+  setId?: string;
   tournamentId: TournamentId;
   groupCode: GroupCode;
   countryId: CountryId;
