@@ -1,0 +1,2688 @@
+{
+  "schemaVersion": "reviewed-administration-command-bundle/v1",
+  "tournamentId": "fifa-world-cup-2026",
+  "structureSha256": "8baa30eb144b90eba1710054ca8a375e3e85ce1a3c81726273f8207779de02b3",
+  "officialAsOf": "2026-07-15T05:56:29Z",
+  "reviewRequired": true,
+  "signatureIncluded": false,
+  "instructions": "Review this deterministic payload, then create a signed review envelope with the existing administration workflow. Do not submit this unsigned artifact directly.",
+  "commands": [
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-001",
+        "roundId": "group",
+        "matchNumber": 1,
+        "scheduledAt": "2026-06-11T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "mexico",
+        "awayCountryId": "south-africa",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-002",
+        "roundId": "group",
+        "matchNumber": 2,
+        "scheduledAt": "2026-06-12T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "south-korea",
+        "awayCountryId": "czechia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-003",
+        "roundId": "group",
+        "matchNumber": 3,
+        "scheduledAt": "2026-06-12T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "canada",
+        "awayCountryId": "bosnia-and-herzegovina",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-004",
+        "roundId": "group",
+        "matchNumber": 4,
+        "scheduledAt": "2026-06-13T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "united-states",
+        "awayCountryId": "paraguay",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-005",
+        "roundId": "group",
+        "matchNumber": 5,
+        "scheduledAt": "2026-06-14T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "haiti",
+        "awayCountryId": "scotland",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-006",
+        "roundId": "group",
+        "matchNumber": 6,
+        "scheduledAt": "2026-06-14T04:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "australia",
+        "awayCountryId": "turkiye",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-007",
+        "roundId": "group",
+        "matchNumber": 7,
+        "scheduledAt": "2026-06-13T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "brazil",
+        "awayCountryId": "morocco",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-008",
+        "roundId": "group",
+        "matchNumber": 8,
+        "scheduledAt": "2026-06-13T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "qatar",
+        "awayCountryId": "switzerland",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-009",
+        "roundId": "group",
+        "matchNumber": 9,
+        "scheduledAt": "2026-06-14T23:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "ivory-coast",
+        "awayCountryId": "ecuador",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-010",
+        "roundId": "group",
+        "matchNumber": 10,
+        "scheduledAt": "2026-06-14T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "germany",
+        "awayCountryId": "curacao",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-011",
+        "roundId": "group",
+        "matchNumber": 11,
+        "scheduledAt": "2026-06-14T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "netherlands",
+        "awayCountryId": "japan",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-012",
+        "roundId": "group",
+        "matchNumber": 12,
+        "scheduledAt": "2026-06-15T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "sweden",
+        "awayCountryId": "tunisia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-013",
+        "roundId": "group",
+        "matchNumber": 13,
+        "scheduledAt": "2026-06-15T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "saudi-arabia",
+        "awayCountryId": "uruguay",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-014",
+        "roundId": "group",
+        "matchNumber": 14,
+        "scheduledAt": "2026-06-15T16:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "spain",
+        "awayCountryId": "cabo-verde",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-015",
+        "roundId": "group",
+        "matchNumber": 15,
+        "scheduledAt": "2026-06-16T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "iran",
+        "awayCountryId": "new-zealand",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-016",
+        "roundId": "group",
+        "matchNumber": 16,
+        "scheduledAt": "2026-06-15T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "belgium",
+        "awayCountryId": "egypt",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-017",
+        "roundId": "group",
+        "matchNumber": 17,
+        "scheduledAt": "2026-06-16T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "france",
+        "awayCountryId": "senegal",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-018",
+        "roundId": "group",
+        "matchNumber": 18,
+        "scheduledAt": "2026-06-16T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "iraq",
+        "awayCountryId": "norway",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-019",
+        "roundId": "group",
+        "matchNumber": 19,
+        "scheduledAt": "2026-06-17T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "argentina",
+        "awayCountryId": "algeria",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-020",
+        "roundId": "group",
+        "matchNumber": 20,
+        "scheduledAt": "2026-06-17T04:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "austria",
+        "awayCountryId": "jordan",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-021",
+        "roundId": "group",
+        "matchNumber": 21,
+        "scheduledAt": "2026-06-17T23:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "ghana",
+        "awayCountryId": "panama",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-022",
+        "roundId": "group",
+        "matchNumber": 22,
+        "scheduledAt": "2026-06-17T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "england",
+        "awayCountryId": "croatia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-023",
+        "roundId": "group",
+        "matchNumber": 23,
+        "scheduledAt": "2026-06-17T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "portugal",
+        "awayCountryId": "congo-dr",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-024",
+        "roundId": "group",
+        "matchNumber": 24,
+        "scheduledAt": "2026-06-18T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "uzbekistan",
+        "awayCountryId": "colombia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-025",
+        "roundId": "group",
+        "matchNumber": 25,
+        "scheduledAt": "2026-06-18T16:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "czechia",
+        "awayCountryId": "south-africa",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-026",
+        "roundId": "group",
+        "matchNumber": 26,
+        "scheduledAt": "2026-06-18T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "switzerland",
+        "awayCountryId": "bosnia-and-herzegovina",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-027",
+        "roundId": "group",
+        "matchNumber": 27,
+        "scheduledAt": "2026-06-18T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "canada",
+        "awayCountryId": "qatar",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-028",
+        "roundId": "group",
+        "matchNumber": 28,
+        "scheduledAt": "2026-06-19T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "mexico",
+        "awayCountryId": "south-korea",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-029",
+        "roundId": "group",
+        "matchNumber": 29,
+        "scheduledAt": "2026-06-20T00:30:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "brazil",
+        "awayCountryId": "haiti",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-030",
+        "roundId": "group",
+        "matchNumber": 30,
+        "scheduledAt": "2026-06-19T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "scotland",
+        "awayCountryId": "morocco",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-031",
+        "roundId": "group",
+        "matchNumber": 31,
+        "scheduledAt": "2026-06-20T03:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "turkiye",
+        "awayCountryId": "paraguay",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-032",
+        "roundId": "group",
+        "matchNumber": 32,
+        "scheduledAt": "2026-06-19T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "united-states",
+        "awayCountryId": "australia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-033",
+        "roundId": "group",
+        "matchNumber": 33,
+        "scheduledAt": "2026-06-20T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "germany",
+        "awayCountryId": "ivory-coast",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-034",
+        "roundId": "group",
+        "matchNumber": 34,
+        "scheduledAt": "2026-06-21T00:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "ecuador",
+        "awayCountryId": "curacao",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-035",
+        "roundId": "group",
+        "matchNumber": 35,
+        "scheduledAt": "2026-06-20T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "netherlands",
+        "awayCountryId": "sweden",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-036",
+        "roundId": "group",
+        "matchNumber": 36,
+        "scheduledAt": "2026-06-21T04:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "tunisia",
+        "awayCountryId": "japan",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-037",
+        "roundId": "group",
+        "matchNumber": 37,
+        "scheduledAt": "2026-06-21T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "uruguay",
+        "awayCountryId": "cabo-verde",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-038",
+        "roundId": "group",
+        "matchNumber": 38,
+        "scheduledAt": "2026-06-21T16:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "spain",
+        "awayCountryId": "saudi-arabia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-039",
+        "roundId": "group",
+        "matchNumber": 39,
+        "scheduledAt": "2026-06-21T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "belgium",
+        "awayCountryId": "iran",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-040",
+        "roundId": "group",
+        "matchNumber": 40,
+        "scheduledAt": "2026-06-22T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "new-zealand",
+        "awayCountryId": "egypt",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-041",
+        "roundId": "group",
+        "matchNumber": 41,
+        "scheduledAt": "2026-06-23T00:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "norway",
+        "awayCountryId": "senegal",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-042",
+        "roundId": "group",
+        "matchNumber": 42,
+        "scheduledAt": "2026-06-22T21:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "france",
+        "awayCountryId": "iraq",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-043",
+        "roundId": "group",
+        "matchNumber": 43,
+        "scheduledAt": "2026-06-22T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "argentina",
+        "awayCountryId": "austria",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-044",
+        "roundId": "group",
+        "matchNumber": 44,
+        "scheduledAt": "2026-06-23T03:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "jordan",
+        "awayCountryId": "algeria",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-045",
+        "roundId": "group",
+        "matchNumber": 45,
+        "scheduledAt": "2026-06-23T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "england",
+        "awayCountryId": "ghana",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-046",
+        "roundId": "group",
+        "matchNumber": 46,
+        "scheduledAt": "2026-06-23T23:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "panama",
+        "awayCountryId": "croatia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-047",
+        "roundId": "group",
+        "matchNumber": 47,
+        "scheduledAt": "2026-06-23T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "portugal",
+        "awayCountryId": "uzbekistan",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-048",
+        "roundId": "group",
+        "matchNumber": 48,
+        "scheduledAt": "2026-06-24T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "colombia",
+        "awayCountryId": "congo-dr",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-049",
+        "roundId": "group",
+        "matchNumber": 49,
+        "scheduledAt": "2026-06-24T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "scotland",
+        "awayCountryId": "brazil",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-050",
+        "roundId": "group",
+        "matchNumber": 50,
+        "scheduledAt": "2026-06-24T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "morocco",
+        "awayCountryId": "haiti",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-051",
+        "roundId": "group",
+        "matchNumber": 51,
+        "scheduledAt": "2026-06-24T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "switzerland",
+        "awayCountryId": "canada",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-052",
+        "roundId": "group",
+        "matchNumber": 52,
+        "scheduledAt": "2026-06-24T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "bosnia-and-herzegovina",
+        "awayCountryId": "qatar",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-053",
+        "roundId": "group",
+        "matchNumber": 53,
+        "scheduledAt": "2026-06-25T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "czechia",
+        "awayCountryId": "mexico",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-054",
+        "roundId": "group",
+        "matchNumber": 54,
+        "scheduledAt": "2026-06-25T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "south-africa",
+        "awayCountryId": "south-korea",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-055",
+        "roundId": "group",
+        "matchNumber": 55,
+        "scheduledAt": "2026-06-25T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "curacao",
+        "awayCountryId": "ivory-coast",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-056",
+        "roundId": "group",
+        "matchNumber": 56,
+        "scheduledAt": "2026-06-25T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "ecuador",
+        "awayCountryId": "germany",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-057",
+        "roundId": "group",
+        "matchNumber": 57,
+        "scheduledAt": "2026-06-25T23:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "japan",
+        "awayCountryId": "sweden",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-058",
+        "roundId": "group",
+        "matchNumber": 58,
+        "scheduledAt": "2026-06-25T23:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "tunisia",
+        "awayCountryId": "netherlands",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-059",
+        "roundId": "group",
+        "matchNumber": 59,
+        "scheduledAt": "2026-06-26T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "turkiye",
+        "awayCountryId": "united-states",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-060",
+        "roundId": "group",
+        "matchNumber": 60,
+        "scheduledAt": "2026-06-26T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "paraguay",
+        "awayCountryId": "australia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-061",
+        "roundId": "group",
+        "matchNumber": 61,
+        "scheduledAt": "2026-06-26T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "norway",
+        "awayCountryId": "france",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-062",
+        "roundId": "group",
+        "matchNumber": 62,
+        "scheduledAt": "2026-06-26T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "senegal",
+        "awayCountryId": "iraq",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-063",
+        "roundId": "group",
+        "matchNumber": 63,
+        "scheduledAt": "2026-06-27T03:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "egypt",
+        "awayCountryId": "iran",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-064",
+        "roundId": "group",
+        "matchNumber": 64,
+        "scheduledAt": "2026-06-27T03:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "new-zealand",
+        "awayCountryId": "belgium",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-065",
+        "roundId": "group",
+        "matchNumber": 65,
+        "scheduledAt": "2026-06-27T00:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "cabo-verde",
+        "awayCountryId": "saudi-arabia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-066",
+        "roundId": "group",
+        "matchNumber": 66,
+        "scheduledAt": "2026-06-27T00:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "uruguay",
+        "awayCountryId": "spain",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-067",
+        "roundId": "group",
+        "matchNumber": 67,
+        "scheduledAt": "2026-06-27T21:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "panama",
+        "awayCountryId": "england",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-068",
+        "roundId": "group",
+        "matchNumber": 68,
+        "scheduledAt": "2026-06-27T21:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "croatia",
+        "awayCountryId": "ghana",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-069",
+        "roundId": "group",
+        "matchNumber": 69,
+        "scheduledAt": "2026-06-28T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "algeria",
+        "awayCountryId": "austria",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-070",
+        "roundId": "group",
+        "matchNumber": 70,
+        "scheduledAt": "2026-06-28T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "jordan",
+        "awayCountryId": "argentina",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-071",
+        "roundId": "group",
+        "matchNumber": 71,
+        "scheduledAt": "2026-06-27T23:30:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "colombia",
+        "awayCountryId": "portugal",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-072",
+        "roundId": "group",
+        "matchNumber": 72,
+        "scheduledAt": "2026-06-27T23:30:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "congo-dr",
+        "awayCountryId": "uzbekistan",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-073",
+        "roundId": "round-of-32",
+        "matchNumber": 73,
+        "scheduledAt": "2026-06-28T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "south-africa",
+        "awayCountryId": "canada",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-074",
+        "roundId": "round-of-32",
+        "matchNumber": 74,
+        "scheduledAt": "2026-06-29T20:30:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "germany",
+        "awayCountryId": "paraguay",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-075",
+        "roundId": "round-of-32",
+        "matchNumber": 75,
+        "scheduledAt": "2026-06-30T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "netherlands",
+        "awayCountryId": "morocco",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-076",
+        "roundId": "round-of-32",
+        "matchNumber": 76,
+        "scheduledAt": "2026-06-29T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "brazil",
+        "awayCountryId": "japan",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-077",
+        "roundId": "round-of-32",
+        "matchNumber": 77,
+        "scheduledAt": "2026-06-30T21:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "france",
+        "awayCountryId": "sweden",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-078",
+        "roundId": "round-of-32",
+        "matchNumber": 78,
+        "scheduledAt": "2026-06-30T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "ivory-coast",
+        "awayCountryId": "norway",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-079",
+        "roundId": "round-of-32",
+        "matchNumber": 79,
+        "scheduledAt": "2026-07-01T02:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "mexico",
+        "awayCountryId": "ecuador",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-080",
+        "roundId": "round-of-32",
+        "matchNumber": 80,
+        "scheduledAt": "2026-07-01T16:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "england",
+        "awayCountryId": "congo-dr",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-081",
+        "roundId": "round-of-32",
+        "matchNumber": 81,
+        "scheduledAt": "2026-07-02T00:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "united-states",
+        "awayCountryId": "bosnia-and-herzegovina",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-082",
+        "roundId": "round-of-32",
+        "matchNumber": 82,
+        "scheduledAt": "2026-07-01T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "belgium",
+        "awayCountryId": "senegal",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-083",
+        "roundId": "round-of-32",
+        "matchNumber": 83,
+        "scheduledAt": "2026-07-02T23:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "portugal",
+        "awayCountryId": "croatia",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-084",
+        "roundId": "round-of-32",
+        "matchNumber": 84,
+        "scheduledAt": "2026-07-02T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "spain",
+        "awayCountryId": "austria",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-085",
+        "roundId": "round-of-32",
+        "matchNumber": 85,
+        "scheduledAt": "2026-07-03T03:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "switzerland",
+        "awayCountryId": "algeria",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-086",
+        "roundId": "round-of-32",
+        "matchNumber": 86,
+        "scheduledAt": "2026-07-03T22:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "argentina",
+        "awayCountryId": "cabo-verde",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-087",
+        "roundId": "round-of-32",
+        "matchNumber": 87,
+        "scheduledAt": "2026-07-04T01:30:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "colombia",
+        "awayCountryId": "ghana",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-088",
+        "roundId": "round-of-32",
+        "matchNumber": 88,
+        "scheduledAt": "2026-07-03T18:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "australia",
+        "awayCountryId": "egypt",
+        "homeSourceSlot": null,
+        "awaySourceSlot": null
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-089",
+        "roundId": "round-of-16",
+        "matchNumber": 89,
+        "scheduledAt": "2026-07-04T21:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "paraguay",
+        "awayCountryId": "france",
+        "homeSourceSlot": { "sourceMatchId": "match-074", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-077", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-090",
+        "roundId": "round-of-16",
+        "matchNumber": 90,
+        "scheduledAt": "2026-07-04T17:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "canada",
+        "awayCountryId": "morocco",
+        "homeSourceSlot": { "sourceMatchId": "match-073", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-075", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-091",
+        "roundId": "round-of-16",
+        "matchNumber": 91,
+        "scheduledAt": "2026-07-05T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "brazil",
+        "awayCountryId": "norway",
+        "homeSourceSlot": { "sourceMatchId": "match-076", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-078", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-092",
+        "roundId": "round-of-16",
+        "matchNumber": 92,
+        "scheduledAt": "2026-07-06T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "mexico",
+        "awayCountryId": "england",
+        "homeSourceSlot": { "sourceMatchId": "match-079", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-080", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-093",
+        "roundId": "round-of-16",
+        "matchNumber": 93,
+        "scheduledAt": "2026-07-06T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "portugal",
+        "awayCountryId": "spain",
+        "homeSourceSlot": { "sourceMatchId": "match-083", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-084", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-094",
+        "roundId": "round-of-16",
+        "matchNumber": 94,
+        "scheduledAt": "2026-07-07T00:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "united-states",
+        "awayCountryId": "belgium",
+        "homeSourceSlot": { "sourceMatchId": "match-081", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-082", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-095",
+        "roundId": "round-of-16",
+        "matchNumber": 95,
+        "scheduledAt": "2026-07-07T16:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "argentina",
+        "awayCountryId": "egypt",
+        "homeSourceSlot": { "sourceMatchId": "match-086", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-088", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-096",
+        "roundId": "round-of-16",
+        "matchNumber": 96,
+        "scheduledAt": "2026-07-07T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "switzerland",
+        "awayCountryId": "colombia",
+        "homeSourceSlot": { "sourceMatchId": "match-085", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-087", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-097",
+        "roundId": "quarterfinal",
+        "matchNumber": 97,
+        "scheduledAt": "2026-07-09T20:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "france",
+        "awayCountryId": "morocco",
+        "homeSourceSlot": { "sourceMatchId": "match-089", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-090", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-098",
+        "roundId": "quarterfinal",
+        "matchNumber": 98,
+        "scheduledAt": "2026-07-10T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "spain",
+        "awayCountryId": "belgium",
+        "homeSourceSlot": { "sourceMatchId": "match-093", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-094", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-099",
+        "roundId": "quarterfinal",
+        "matchNumber": 99,
+        "scheduledAt": "2026-07-11T21:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "norway",
+        "awayCountryId": "england",
+        "homeSourceSlot": { "sourceMatchId": "match-091", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-092", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-100",
+        "roundId": "quarterfinal",
+        "matchNumber": 100,
+        "scheduledAt": "2026-07-12T01:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "argentina",
+        "awayCountryId": "switzerland",
+        "homeSourceSlot": { "sourceMatchId": "match-095", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-096", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-101",
+        "roundId": "semifinal",
+        "matchNumber": 101,
+        "scheduledAt": "2026-07-14T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "france",
+        "awayCountryId": "spain",
+        "homeSourceSlot": { "sourceMatchId": "match-097", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-098", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-102",
+        "roundId": "semifinal",
+        "matchNumber": 102,
+        "scheduledAt": "2026-07-15T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "england",
+        "awayCountryId": "argentina",
+        "homeSourceSlot": { "sourceMatchId": "match-099", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-100", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-103",
+        "roundId": "third-place",
+        "matchNumber": 103,
+        "scheduledAt": "2026-07-18T21:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "france",
+        "awayCountryId": null,
+        "homeSourceSlot": { "sourceMatchId": "match-101", "outcome": "loser" },
+        "awaySourceSlot": { "sourceMatchId": "match-102", "outcome": "loser" }
+      }
+    },
+    {
+      "type": "upsert_fixture",
+      "fixture": {
+        "id": "match-104",
+        "roundId": "final",
+        "matchNumber": 104,
+        "scheduledAt": "2026-07-19T19:00:00.000Z",
+        "status": "scheduled",
+        "homeCountryId": "spain",
+        "awayCountryId": null,
+        "homeSourceSlot": { "sourceMatchId": "match-101", "outcome": "winner" },
+        "awaySourceSlot": { "sourceMatchId": "match-102", "outcome": "winner" }
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-001",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-002",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-003",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-004",
+        "homeGoals": 4,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-005",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-006",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-007",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-008",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-009",
+        "homeGoals": 1,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-010",
+        "homeGoals": 7,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-011",
+        "homeGoals": 2,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-012",
+        "homeGoals": 5,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-013",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-014",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-015",
+        "homeGoals": 2,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-016",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-017",
+        "homeGoals": 3,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-018",
+        "homeGoals": 1,
+        "awayGoals": 4,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-019",
+        "homeGoals": 3,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-020",
+        "homeGoals": 3,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-021",
+        "homeGoals": 1,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-022",
+        "homeGoals": 4,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-023",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-024",
+        "homeGoals": 1,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-025",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-026",
+        "homeGoals": 4,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-027",
+        "homeGoals": 6,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-028",
+        "homeGoals": 1,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-029",
+        "homeGoals": 3,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-030",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-031",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-032",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-033",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-034",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-035",
+        "homeGoals": 5,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-036",
+        "homeGoals": 0,
+        "awayGoals": 4,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-037",
+        "homeGoals": 2,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-038",
+        "homeGoals": 4,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-039",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-040",
+        "homeGoals": 1,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-041",
+        "homeGoals": 3,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-042",
+        "homeGoals": 3,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-043",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-044",
+        "homeGoals": 1,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-045",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-046",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-047",
+        "homeGoals": 5,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-048",
+        "homeGoals": 1,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-049",
+        "homeGoals": 0,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-050",
+        "homeGoals": 4,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-051",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-052",
+        "homeGoals": 3,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-053",
+        "homeGoals": 0,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-054",
+        "homeGoals": 1,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-055",
+        "homeGoals": 0,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-056",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-057",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-058",
+        "homeGoals": 1,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-059",
+        "homeGoals": 3,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-060",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-061",
+        "homeGoals": 1,
+        "awayGoals": 4,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-062",
+        "homeGoals": 5,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-063",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-064",
+        "homeGoals": 1,
+        "awayGoals": 5,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-065",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-066",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-067",
+        "homeGoals": 0,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-068",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-069",
+        "homeGoals": 3,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-070",
+        "homeGoals": 1,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-071",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-072",
+        "homeGoals": 3,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": null
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-073",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "canada"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-074",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": 3,
+        "awayShootoutGoals": 4,
+        "advancingCountryId": "paraguay"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-075",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": 2,
+        "awayShootoutGoals": 3,
+        "advancingCountryId": "morocco"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-076",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "brazil"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-077",
+        "homeGoals": 3,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "france"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-078",
+        "homeGoals": 1,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "norway"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-079",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "mexico"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-080",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "england"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-081",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "united-states"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-082",
+        "homeGoals": 3,
+        "awayGoals": 2,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "belgium"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-083",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "portugal"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-084",
+        "homeGoals": 3,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "spain"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-085",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "switzerland"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-086",
+        "homeGoals": 3,
+        "awayGoals": 2,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "argentina"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-087",
+        "homeGoals": 1,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "colombia"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-088",
+        "homeGoals": 1,
+        "awayGoals": 1,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": 2,
+        "awayShootoutGoals": 4,
+        "advancingCountryId": "egypt"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-089",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "france"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-090",
+        "homeGoals": 0,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "morocco"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-091",
+        "homeGoals": 1,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "norway"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-092",
+        "homeGoals": 2,
+        "awayGoals": 3,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "england"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-093",
+        "homeGoals": 0,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "spain"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-094",
+        "homeGoals": 1,
+        "awayGoals": 4,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "belgium"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-095",
+        "homeGoals": 3,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "argentina"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-096",
+        "homeGoals": 0,
+        "awayGoals": 0,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": 4,
+        "awayShootoutGoals": 3,
+        "advancingCountryId": "switzerland"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-097",
+        "homeGoals": 2,
+        "awayGoals": 0,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "france"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-098",
+        "homeGoals": 2,
+        "awayGoals": 1,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "spain"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-099",
+        "homeGoals": 1,
+        "awayGoals": 2,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "england"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-100",
+        "homeGoals": 3,
+        "awayGoals": 1,
+        "wentToExtraTime": true,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "argentina"
+      }
+    },
+    {
+      "type": "record_result",
+      "result": {
+        "matchId": "match-101",
+        "homeGoals": 0,
+        "awayGoals": 2,
+        "wentToExtraTime": false,
+        "homeShootoutGoals": null,
+        "awayShootoutGoals": null,
+        "advancingCountryId": "spain"
+      }
+    },
+    {
+      "type": "update_tournament_metadata",
+      "update": {
+        "status": "active",
+        "currentRoundId": "semifinal",
+        "referenceDataComplete": true,
+        "missingOfficialData": []
+      }
+    }
+  ]
+}

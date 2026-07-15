@@ -5,6 +5,7 @@ import {
   REFERENCE_TOURNAMENT,
 } from "../../data/reference/tournament";
 import { REFERENCE_ROUNDS } from "../../data/reference/rounds";
+import { REFERENCE_SNAPSHOT } from "../../data/reference/snapshot";
 import type {
   Country,
   GroupCode,
@@ -101,7 +102,7 @@ describe("page-model services", () => {
     });
     expect(tournament).toMatchObject({
       tournamentName: "2026 FIFA World Cup",
-      representedCountryCount: 25,
+      representedCountryCount: 48,
       expectedCountryCount: 48,
       referenceDataComplete: false,
     });
@@ -192,8 +193,8 @@ describe("page-model services", () => {
       ]),
     ).toEqual([
       ["france", 1],
-      ["portugal", 2],
       ["argentina", 2],
+      ["portugal", 2],
       ["spain", 4],
     ]);
     expect(groupA?.countries.every(({ owner }) => owner !== null)).toBe(true);
@@ -248,7 +249,15 @@ describe("page-model services", () => {
       new LocalTournamentRepository(completeEmptySnapshot()),
     );
     const incomplete = await getDashboardPageModel(
-      createReferenceTournamentRepository(),
+      new LocalTournamentRepository({
+        ...REFERENCE_SNAPSHOT,
+        tournament: {
+          ...REFERENCE_SNAPSHOT.tournament!,
+          referenceDataComplete: false,
+          missingOfficialData: ["Fixture schedule is incomplete"],
+        },
+        matches: [],
+      }),
     );
 
     expect(empty.status).toBe("empty");

@@ -6,17 +6,17 @@ import type { TournamentDataSnapshot } from "./types";
 import { validateCanonicalData } from "./validation";
 
 describe("validateCanonicalData", () => {
-  it("accepts both local datasets with only declared incompleteness", () => {
-    for (const snapshot of [
-      REFERENCE_SNAPSHOT,
+  it("accepts the complete official snapshot and declared-incomplete development data", () => {
+    expect(validateCanonicalData(REFERENCE_SNAPSHOT)).toEqual([]);
+    const developmentIssues = validateCanonicalData(
       FICTIONAL_DEVELOPMENT_SNAPSHOT,
-    ]) {
-      const issues = validateCanonicalData(snapshot);
-      expect(issues.filter(({ severity }) => severity === "error")).toEqual([]);
-      expect(issues.some(({ severity }) => severity === "incomplete")).toBe(
-        true,
-      );
-    }
+    );
+    expect(
+      developmentIssues.filter(({ severity }) => severity === "error"),
+    ).toEqual([]);
+    expect(
+      developmentIssues.some(({ severity }) => severity === "incomplete"),
+    ).toBe(true);
   });
 
   it("rejects duplicate participant identity fields", () => {
@@ -150,6 +150,12 @@ describe("validateCanonicalData", () => {
   it("rejects a false claim that an incomplete dataset is complete", () => {
     const invalid = {
       ...REFERENCE_SNAPSHOT,
+      countries: REFERENCE_SNAPSHOT.countries.slice(0, 47),
+      groups: REFERENCE_SNAPSHOT.groups.map((group) =>
+        group.code === "L"
+          ? { ...group, countryIds: group.countryIds.slice(0, 3) }
+          : group,
+      ),
       tournament: {
         ...REFERENCE_SNAPSHOT.tournament!,
         referenceDataComplete: true,

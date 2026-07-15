@@ -2,6 +2,13 @@ begin;
 
 select plan(24);
 
+update public.tournaments set status = 'planned', current_round_id = 'group', reference_data_complete = false, missing_official_data = array['isolated semantic test'];
+delete from public.match_source_slots;
+delete from public.group_override_entries;
+delete from public.group_override_sets;
+delete from public.matches;
+delete from public.group_memberships;
+
 insert into public.countries (id, name, fifa_code) values
   ('semantic-a1', 'Semantic A1', 'SAA'), ('semantic-a2', 'Semantic A2', 'SAB'),
   ('semantic-a3', 'Semantic A3', 'SAC'), ('semantic-a4', 'Semantic A4', 'SAD'),

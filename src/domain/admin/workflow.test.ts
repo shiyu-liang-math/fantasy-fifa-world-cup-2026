@@ -971,28 +971,28 @@ describe("reviewed administration workflow", () => {
     };
     expect
       .soft(sha256(models.home))
-      .toBe("8bb497d9d64c1d2b468e813c8b0119368fb2f84556609518eea0a0c91c3d14de");
+      .toBe("8b90c9287c6f73e01414b5ee902a62aa1d292b344e3b8e59a91dfc942f11ca86");
     expect
       .soft(sha256(models.dashboard))
-      .toBe("82b93abdea3c1f4ffdcbe0b3c26ad91ad36b1f8f38fc027cf452ed945cf11102");
+      .toBe("9ef0331764a98643a41dff8e205ff07e8bde507f93433cff73b49463b53d0ed5");
     expect
       .soft(sha256(models.tournament))
-      .toBe("9ffebbaab9d535b0801ee4ebba474e0bcb477bd81dd0f42601d285f8bd459faa");
+      .toBe("49d491cb8e58e28ba89644eeae274ca803c6ec018c269997f6e3899bfff9681d");
     expect
       .soft(sha256(models.groups))
-      .toBe("096a35ea2421f44de031e89fc17164c9e3f14b927f4bd1d56d8a132dc82bbcd9");
+      .toBe("93765112cbd67a54615aefff06e58e69dfa474f239369ff072f9bfcd28bed80e");
     expect
       .soft(sha256(models.bracket))
-      .toBe("0b4241c358baeffbcff0e40b6f2f653824295cfbf3e461c29ed698d1aa9da37e");
+      .toBe("cdbca85bf060d8f8bbfc73c3c74643b5bd3deded730fbfb6c2e5f3142c52982d");
     expect
       .soft(sha256(models.awards))
-      .toBe("ebe6092d29c943dfd1ea10aee5029ab3ca2f1a4608930737f671d3b48851fab5");
+      .toBe("a84b9d0e192d08ee900f89ee2a38aa981e9c3ac880ee02470bcaf9c21f2994c9");
     expect
       .soft(sha256(models.participant))
-      .toBe("db9b150031dfa5c51b1a425bb24b5b9390185e5cfa1b440bc0c47961ba9b02a4");
+      .toBe("602e4996fc4cda40da3d69d776ccf1acaab5cb5bca3b7fbcb8d3a9d3f8a012be");
     expect
       .soft(sha256(models.rules))
-      .toBe("548ade523e3b2d91cfd2b93037b136d6f10c912579f7b2c6c367ede99f55f866");
+      .toBe("ac8cde93418536af276da138409b2b5113533f7ff955e56eef3882bf8cd45891");
   });
 });
 

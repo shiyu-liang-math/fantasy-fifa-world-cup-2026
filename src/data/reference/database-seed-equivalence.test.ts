@@ -5,6 +5,7 @@ vi.mock("server-only", () => ({}));
 
 import { mapSupabaseSnapshot } from "../../repositories/supabase-snapshot-mapper";
 import { compareGroupOverrideEntries } from "../../domain/group-override-entry";
+import { deriveGroupQualifications } from "../../domain/group-qualification";
 import { prepareAdministrationUpdate } from "../../domain/admin/workflow";
 import { createAdministrationReviewEnvelope } from "../../services/administration/review-envelope";
 import { REFERENCE_SNAPSHOT } from "./snapshot";
@@ -34,7 +35,12 @@ describe("stable database seed equivalence", () => {
       { encoding: "utf8" },
     ).trim();
 
-    expect(normalize(JSON.parse(output))).toEqual(
+    const projected = JSON.parse(output) as typeof REFERENCE_SNAPSHOT;
+    const projectedWithQualifications = {
+      ...projected,
+      groupQualifications: deriveGroupQualifications(projected),
+    };
+    expect(normalize(projectedWithQualifications)).toEqual(
       normalize(structuredClone(REFERENCE_SNAPSHOT)),
     );
   });
@@ -74,11 +80,6 @@ describe("stable database seed equivalence", () => {
           begin;
           insert into auth.users (id) values ('${actor}');
           insert into private.administrator_allowlist (user_id) values ('${actor}');
-          insert into public.group_memberships (tournament_id, group_code, country_id, display_order) values
-            ('fifa-world-cup-2026','A','france',1),
-            ('fifa-world-cup-2026','A','spain',2),
-            ('fifa-world-cup-2026','A','portugal',3),
-            ('fifa-world-cup-2026','A','argentina',4);
           set local "request.jwt.claim.sub" = '${actor}';
           set local role authenticated;
           select public.read_administration_context('fifa-world-cup-2026');
@@ -111,11 +112,6 @@ describe("stable database seed equivalence", () => {
         begin;
         insert into auth.users (id) values ('${actor}');
         insert into private.administrator_allowlist (user_id) values ('${actor}');
-        insert into public.group_memberships (tournament_id, group_code, country_id, display_order) values
-          ('fifa-world-cup-2026','A','france',1),
-          ('fifa-world-cup-2026','A','spain',2),
-          ('fifa-world-cup-2026','A','portugal',3),
-          ('fifa-world-cup-2026','A','argentina',4);
         set local "request.jwt.claim.sub" = '${actor}';
         set local role authenticated;
         select public.apply_administration_change(

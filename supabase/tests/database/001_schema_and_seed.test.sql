@@ -19,13 +19,13 @@ select has_table('private', 'audit_log', 'audit log exists privately');
 
 select is((select count(*) from public.tournaments), 1::bigint, 'one tournament is seeded');
 select is((select count(*) from public.participants), 5::bigint, 'five participants are seeded');
-select is((select count(*) from public.countries), 25::bigint, 'only 25 authoritative countries are seeded');
+select is((select count(*) from public.countries), 48::bigint, 'all 48 official countries are seeded');
 select is((select count(*) from public.draft_picks), 25::bigint, '25 draft picks are seeded');
 select is((select count(*) from public.tournament_rounds), 7::bigint, 'seven tournament rounds are seeded');
 select is((select count(*) from public.tournament_groups), 12::bigint, 'Groups A through L are seeded');
-select is((select count(*) from public.group_memberships), 0::bigint, 'official group assignments are not invented');
-select is((select count(*) from public.matches), 0::bigint, 'fictional matches are excluded from stable seed');
-select is((select count(*) from public.match_source_slots), 0::bigint, 'source slots are absent without official fixtures');
+select is((select count(*) from public.group_memberships), 48::bigint, 'all 48 official group assignments are seeded');
+select is((select count(*) from public.matches), 104::bigint, 'all 104 official fixtures are seeded');
+select is((select count(*) from public.match_source_slots), 32::bigint, 'representable knockout source slots are seeded');
 select is((select count(*) from public.group_override_sets), 0::bigint, 'group override sets are not invented');
 select is((select count(*) from public.group_override_entries), 0::bigint, 'group override entries are not invented');
 select is((select count(*) from private.administrator_allowlist), 0::bigint, 'administrator identities are not seeded');
@@ -33,13 +33,13 @@ select is((select count(*) from private.administration_change_sets), 0::bigint, 
 select is((select count(*) from private.audit_log), 0::bigint, 'audit events are not seeded');
 select is(
   (select current_round_id from public.tournaments where id = 'fifa-world-cup-2026'),
-  'group'::text,
+  'semifinal'::text,
   'current round matches the TypeScript reference snapshot'
 );
 select is(
   (select cardinality(missing_official_data) from public.tournaments where id = 'fifa-world-cup-2026'),
-  4,
-  'all missing-official-data explanations are retained'
+  0,
+  'the complete snapshot has no missing-official-data explanation'
 );
 select is(
   (select count(*) from supabase_migrations.schema_migrations where version like '20260713%'),

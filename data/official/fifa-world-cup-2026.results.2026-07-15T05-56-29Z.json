@@ -1,0 +1,1042 @@
+{
+  "schemaVersion": "official-tournament-results/v1",
+  "tournamentId": "fifa-world-cup-2026",
+  "structureSha256": "8baa30eb144b90eba1710054ca8a375e3e85ce1a3c81726273f8207779de02b3",
+  "sources": [
+    {
+      "url": "https://api.fifa.com/api/v3/calendar/matches?language=en&count=500&IdCompetition=17&IdSeason=285023",
+      "description": "Official FIFA Data Platform match feed for FIFA World Cup 2026, season 285023; authoritative for teams, group slots, fixtures, UTC kickoffs, match status, results, shootouts, and winners at the cutoff.",
+      "retrievedAt": "2026-07-15T05:56:29Z"
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/teams/",
+      "description": "Official FIFA World Cup 2026 team list.",
+      "retrievedAt": "2026-07-15T05:56:29Z"
+    },
+    {
+      "url": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/final-draw-results",
+      "description": "Official FIFA final draw and group allocation page.",
+      "retrievedAt": "2026-07-15T05:56:29Z"
+    },
+    {
+      "url": "https://fwc26teambasecamps.fifa.com/ReactApps/TBC/dist/static/media/match-schedule-english.071cf28145379e10f0cf.pdf",
+      "description": "Official FIFA match schedule document, dated 5 September 2025; authoritative for match numbering and knockout winner/loser formulas, reconciled with the current FIFA match feed for resolved participants and kickoff times.",
+      "retrievedAt": "2026-07-15T05:56:29Z"
+    }
+  ],
+  "retrievedAt": "2026-07-15T05:56:29Z",
+  "officialAsOf": "2026-07-15T05:56:29Z",
+  "cutoffExplanation": "The official FIFA match feed was retrieved after semifinal match 101 was final and before semifinal match 102 began. Only MatchStatus 0 records are imported as completed.",
+  "omittedResultMeaning": "A fixture without an entry in completedResults was not officially final at officialAsOf and remains scheduled without a fabricated score or advancing country.",
+  "completedResults": [
+    {
+      "matchId": "match-001",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-002",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-003",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-004",
+      "homeGoals": 4,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-005",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-006",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-007",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-008",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-009",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-010",
+      "homeGoals": 7,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-011",
+      "homeGoals": 2,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-012",
+      "homeGoals": 5,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-013",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-014",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-015",
+      "homeGoals": 2,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-016",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-017",
+      "homeGoals": 3,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-018",
+      "homeGoals": 1,
+      "awayGoals": 4,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-019",
+      "homeGoals": 3,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-020",
+      "homeGoals": 3,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-021",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-022",
+      "homeGoals": 4,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-023",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-024",
+      "homeGoals": 1,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-025",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-026",
+      "homeGoals": 4,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-027",
+      "homeGoals": 6,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-028",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-029",
+      "homeGoals": 3,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-030",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-031",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-032",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-033",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-034",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-035",
+      "homeGoals": 5,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-036",
+      "homeGoals": 0,
+      "awayGoals": 4,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-037",
+      "homeGoals": 2,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-038",
+      "homeGoals": 4,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-039",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-040",
+      "homeGoals": 1,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-041",
+      "homeGoals": 3,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-042",
+      "homeGoals": 3,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-043",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-044",
+      "homeGoals": 1,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-045",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-046",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-047",
+      "homeGoals": 5,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-048",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-049",
+      "homeGoals": 0,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-050",
+      "homeGoals": 4,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-051",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-052",
+      "homeGoals": 3,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-053",
+      "homeGoals": 0,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-054",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-055",
+      "homeGoals": 0,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-056",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-057",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-058",
+      "homeGoals": 1,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-059",
+      "homeGoals": 3,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-060",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-061",
+      "homeGoals": 1,
+      "awayGoals": 4,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-062",
+      "homeGoals": 5,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-063",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-064",
+      "homeGoals": 1,
+      "awayGoals": 5,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-065",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-066",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-067",
+      "homeGoals": 0,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-068",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-069",
+      "homeGoals": 3,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-070",
+      "homeGoals": 1,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-071",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-072",
+      "homeGoals": 3,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": null
+    },
+    {
+      "matchId": "match-073",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "canada"
+    },
+    {
+      "matchId": "match-074",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": 3,
+      "awayShootoutGoals": 4,
+      "advancingCountryId": "paraguay"
+    },
+    {
+      "matchId": "match-075",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": 2,
+      "awayShootoutGoals": 3,
+      "advancingCountryId": "morocco"
+    },
+    {
+      "matchId": "match-076",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "brazil"
+    },
+    {
+      "matchId": "match-077",
+      "homeGoals": 3,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "france"
+    },
+    {
+      "matchId": "match-078",
+      "homeGoals": 1,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "norway"
+    },
+    {
+      "matchId": "match-079",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "mexico"
+    },
+    {
+      "matchId": "match-080",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "england"
+    },
+    {
+      "matchId": "match-081",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "united-states"
+    },
+    {
+      "matchId": "match-082",
+      "homeGoals": 3,
+      "awayGoals": 2,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "belgium"
+    },
+    {
+      "matchId": "match-083",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "portugal"
+    },
+    {
+      "matchId": "match-084",
+      "homeGoals": 3,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "spain"
+    },
+    {
+      "matchId": "match-085",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "switzerland"
+    },
+    {
+      "matchId": "match-086",
+      "homeGoals": 3,
+      "awayGoals": 2,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "argentina"
+    },
+    {
+      "matchId": "match-087",
+      "homeGoals": 1,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "colombia"
+    },
+    {
+      "matchId": "match-088",
+      "homeGoals": 1,
+      "awayGoals": 1,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": 2,
+      "awayShootoutGoals": 4,
+      "advancingCountryId": "egypt"
+    },
+    {
+      "matchId": "match-089",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "france"
+    },
+    {
+      "matchId": "match-090",
+      "homeGoals": 0,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "morocco"
+    },
+    {
+      "matchId": "match-091",
+      "homeGoals": 1,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "norway"
+    },
+    {
+      "matchId": "match-092",
+      "homeGoals": 2,
+      "awayGoals": 3,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "england"
+    },
+    {
+      "matchId": "match-093",
+      "homeGoals": 0,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "spain"
+    },
+    {
+      "matchId": "match-094",
+      "homeGoals": 1,
+      "awayGoals": 4,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "belgium"
+    },
+    {
+      "matchId": "match-095",
+      "homeGoals": 3,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "argentina"
+    },
+    {
+      "matchId": "match-096",
+      "homeGoals": 0,
+      "awayGoals": 0,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": 4,
+      "awayShootoutGoals": 3,
+      "advancingCountryId": "switzerland"
+    },
+    {
+      "matchId": "match-097",
+      "homeGoals": 2,
+      "awayGoals": 0,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "france"
+    },
+    {
+      "matchId": "match-098",
+      "homeGoals": 2,
+      "awayGoals": 1,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "spain"
+    },
+    {
+      "matchId": "match-099",
+      "homeGoals": 1,
+      "awayGoals": 2,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "england"
+    },
+    {
+      "matchId": "match-100",
+      "homeGoals": 3,
+      "awayGoals": 1,
+      "wentToExtraTime": true,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "argentina"
+    },
+    {
+      "matchId": "match-101",
+      "homeGoals": 0,
+      "awayGoals": 2,
+      "wentToExtraTime": false,
+      "homeShootoutGoals": null,
+      "awayShootoutGoals": null,
+      "advancingCountryId": "spain"
+    }
+  ],
+  "officialGroupOrders": [
+    {
+      "groupCode": "A",
+      "orderedCountryIds": ["mexico", "south-africa", "south-korea", "czechia"]
+    },
+    {
+      "groupCode": "B",
+      "orderedCountryIds": [
+        "switzerland",
+        "canada",
+        "bosnia-and-herzegovina",
+        "qatar"
+      ]
+    },
+    {
+      "groupCode": "C",
+      "orderedCountryIds": ["brazil", "morocco", "scotland", "haiti"]
+    },
+    {
+      "groupCode": "D",
+      "orderedCountryIds": ["united-states", "australia", "paraguay", "turkiye"]
+    },
+    {
+      "groupCode": "E",
+      "orderedCountryIds": ["germany", "ivory-coast", "ecuador", "curacao"]
+    },
+    {
+      "groupCode": "F",
+      "orderedCountryIds": ["netherlands", "japan", "sweden", "tunisia"]
+    },
+    {
+      "groupCode": "G",
+      "orderedCountryIds": ["belgium", "egypt", "iran", "new-zealand"]
+    },
+    {
+      "groupCode": "H",
+      "orderedCountryIds": ["spain", "cabo-verde", "uruguay", "saudi-arabia"]
+    },
+    {
+      "groupCode": "I",
+      "orderedCountryIds": ["france", "norway", "senegal", "iraq"]
+    },
+    {
+      "groupCode": "J",
+      "orderedCountryIds": ["argentina", "austria", "algeria", "jordan"]
+    },
+    {
+      "groupCode": "K",
+      "orderedCountryIds": ["colombia", "portugal", "congo-dr", "uzbekistan"]
+    },
+    {
+      "groupCode": "L",
+      "orderedCountryIds": ["england", "croatia", "ghana", "panama"]
+    }
+  ],
+  "groupOverrides": [],
+  "roundOf32QualifiedCountryIds": [
+    "south-africa",
+    "canada",
+    "germany",
+    "paraguay",
+    "netherlands",
+    "morocco",
+    "brazil",
+    "japan",
+    "france",
+    "sweden",
+    "ivory-coast",
+    "norway",
+    "mexico",
+    "ecuador",
+    "england",
+    "congo-dr",
+    "united-states",
+    "bosnia-and-herzegovina",
+    "belgium",
+    "senegal",
+    "portugal",
+    "croatia",
+    "spain",
+    "austria",
+    "switzerland",
+    "algeria",
+    "argentina",
+    "cabo-verde",
+    "colombia",
+    "ghana",
+    "australia",
+    "egypt"
+  ],
+  "bestThirdPlaceQualifiedCountryIds": [
+    "bosnia-and-herzegovina",
+    "paraguay",
+    "ecuador",
+    "sweden",
+    "senegal",
+    "algeria",
+    "congo-dr",
+    "ghana"
+  ]
+}

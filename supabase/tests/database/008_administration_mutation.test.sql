@@ -2,6 +2,13 @@ begin;
 
 select plan(61);
 
+update public.tournaments set status = 'planned', current_round_id = 'group', reference_data_complete = false, missing_official_data = array['isolated administration test'];
+delete from public.match_source_slots;
+delete from public.group_override_entries;
+delete from public.group_override_sets;
+delete from public.matches;
+delete from public.group_memberships;
+
 select has_function('public', 'read_administration_context', array['text'], 'administration context function exists');
 select has_function(
   'public', 'apply_administration_change',

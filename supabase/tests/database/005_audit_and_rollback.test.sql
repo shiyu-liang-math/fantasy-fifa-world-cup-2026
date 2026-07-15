@@ -2,6 +2,13 @@ begin;
 
 select plan(17);
 
+update public.tournaments set reference_data_complete = false, missing_official_data = array['isolated audit test'];
+delete from public.match_source_slots;
+delete from public.group_override_entries;
+delete from public.group_override_sets;
+delete from public.matches;
+delete from public.group_memberships;
+
 select has_trigger(
   'private', 'administration_change_sets', 'administration_change_sets_append_only',
   'change sets have append-only protection'

@@ -2,6 +2,13 @@ begin;
 
 select plan(61);
 
+update public.tournaments set status = 'planned', current_round_id = 'group', reference_data_complete = false, missing_official_data = array['isolated security test'];
+delete from public.match_source_slots;
+delete from public.group_override_entries;
+delete from public.group_override_sets;
+delete from public.matches;
+delete from public.group_memberships;
+
 select is(
   pg_get_userbyid((select proowner from pg_proc where oid = 'public.read_administration_context(text)'::regprocedure)),
   'postgres', 'context function is owned by postgres'

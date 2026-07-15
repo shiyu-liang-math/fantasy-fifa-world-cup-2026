@@ -83,7 +83,7 @@ describe("administration review envelope", () => {
 
   it("produces a stable HMAC with a fixed secret", () => {
     expect(envelope().signature).toBe(
-      "EbQntjBzB0mIn6oqogeY3mtg4mJgD0KwN0Be0EPUI6c",
+      "ZxzycPTMztkqe5pkUyaoxUnf35CuweUn8iprgYBBGNI",
     );
   });
 

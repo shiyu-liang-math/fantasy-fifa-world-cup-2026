@@ -4,6 +4,17 @@
 
 begin;
 
+-- Replace the official operational snapshot inside this transaction so this
+-- manual-only scenario remains isolated and repeatable after the stable seed.
+update public.tournaments
+set reference_data_complete = false,
+    missing_official_data = array['This entire match scenario is fictional development data'];
+delete from public.match_source_slots where tournament_id = 'fifa-world-cup-2026';
+delete from public.group_override_entries where tournament_id = 'fifa-world-cup-2026';
+delete from public.group_override_sets where tournament_id = 'fifa-world-cup-2026';
+delete from public.matches where tournament_id = 'fifa-world-cup-2026';
+delete from public.group_memberships where tournament_id = 'fifa-world-cup-2026';
+
 insert into public.group_memberships (
   tournament_id, group_code, country_id, display_order
 ) values
@@ -53,8 +64,7 @@ set
   status = 'completed',
   current_round_id = 'final',
   last_updated_at = '2026-07-19T22:00:00.000Z',
-  missing_official_data = missing_official_data
-    || array['This entire match scenario is fictional development data']
+  missing_official_data = array['This entire match scenario is fictional development data']
 where id = 'fifa-world-cup-2026';
 
 commit;

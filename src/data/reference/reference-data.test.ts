@@ -73,16 +73,17 @@ describe("authoritative reference data", () => {
     }
   });
 
-  it("contains only named countries and honestly marks missing official data", () => {
-    expect(REFERENCE_COUNTRIES).toHaveLength(25);
+  it("contains the complete official tournament structure and match snapshot", () => {
+    expect(REFERENCE_COUNTRIES).toHaveLength(48);
     expect(REFERENCE_GROUPS).toHaveLength(12);
     expect(
-      REFERENCE_GROUPS.every(({ countryIds }) => countryIds.length === 0),
+      REFERENCE_GROUPS.every(({ countryIds }) => countryIds.length === 4),
     ).toBe(true);
-    expect(REFERENCE_SNAPSHOT.tournament?.referenceDataComplete).toBe(false);
+    expect(REFERENCE_SNAPSHOT.tournament?.referenceDataComplete).toBe(true);
+    expect(REFERENCE_SNAPSHOT.tournament?.missingOfficialData).toEqual([]);
+    expect(REFERENCE_SNAPSHOT.matches).toHaveLength(104);
     expect(
-      REFERENCE_SNAPSHOT.tournament?.missingOfficialData.length,
-    ).toBeGreaterThan(0);
-    expect(REFERENCE_SNAPSHOT.matches).toEqual([]);
+      REFERENCE_SNAPSHOT.matches.filter(({ status }) => status === "completed"),
+    ).toHaveLength(101);
   });
 });

@@ -2,6 +2,13 @@ begin;
 
 select plan(19);
 
+update public.tournaments set status = 'planned', current_round_id = 'group', reference_data_complete = false, missing_official_data = array['isolated failure test'];
+delete from public.match_source_slots;
+delete from public.group_override_entries;
+delete from public.group_override_sets;
+delete from public.matches;
+delete from public.group_memberships;
+
 insert into auth.users (id) values ('76666666-6666-4666-8666-666666666666');
 insert into private.administrator_allowlist (user_id) values ('76666666-6666-4666-8666-666666666666');
 create temporary table failure_before as

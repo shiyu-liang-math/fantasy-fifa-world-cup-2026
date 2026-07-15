@@ -2,6 +2,13 @@ begin;
 
 select plan(16);
 
+update public.tournaments set reference_data_complete = false, missing_official_data = array['isolated constraint test'];
+delete from public.match_source_slots;
+delete from public.group_override_entries;
+delete from public.group_override_sets;
+delete from public.matches;
+delete from public.group_memberships;
+
 select throws_ok(
   $$insert into public.draft_picks (id, tournament_id, participant_id, country_id, draft_value)
     values ('bad-value', 'fifa-world-cup-2026', 'lyla', 'france', 4)$$,

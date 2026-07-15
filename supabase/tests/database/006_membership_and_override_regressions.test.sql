@@ -2,6 +2,13 @@ begin;
 
 select plan(7);
 
+update public.tournaments set reference_data_complete = false, missing_official_data = array['isolated membership test'];
+delete from public.match_source_slots;
+delete from public.group_override_entries;
+delete from public.group_override_sets;
+delete from public.matches;
+delete from public.group_memberships;
+
 insert into public.group_memberships (
   tournament_id, group_code, country_id, display_order
 ) values

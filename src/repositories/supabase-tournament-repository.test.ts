@@ -21,7 +21,7 @@ describe("SupabaseTournamentRepository", () => {
     );
     expect(snapshot.tournament).toEqual(REFERENCE_SNAPSHOT.tournament);
     expect(snapshot.participants).toEqual(REFERENCE_SNAPSHOT.participants);
-    expect(snapshot.matches).toEqual([]);
+    expect(snapshot.matches).toEqual(REFERENCE_SNAPSHOT.matches);
     expect(rpc).toHaveBeenCalledOnce();
     expect(rpc).toHaveBeenCalledWith("read_tournament_snapshot", {
       p_tournament_id: "fifa-world-cup-2026",
