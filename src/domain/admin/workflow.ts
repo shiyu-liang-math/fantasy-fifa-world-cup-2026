@@ -1,8 +1,5 @@
-import {
-  calculateGroupStandings,
-  rankGroupStandings,
-  resolveBestThirdPlaceQualifications,
-} from "../group-standings";
+import { calculateGroupStandings } from "../group-standings";
+import { deriveGroupQualifications } from "../group-qualification";
 import { deriveProgression } from "../progression";
 import { validateCanonicalData } from "../../data/validation";
 import type {
@@ -12,7 +9,7 @@ import type {
   TournamentDataSnapshot,
   TournamentGroup,
 } from "../../data/types";
-import type { CountryId, GroupQualification, MatchId } from "../types";
+import type { CountryId, MatchId } from "../types";
 import { deriveCompetition } from "../../services/page-models/shared";
 import type {
   AdministrationAffectedData,
@@ -867,138 +864,11 @@ function resolveSource(
 
 function recomputeGroupQualifications(work: Work): void {
   if (work.changedGroups.size === 0) return;
-  const changedCountries = new Set(
-    work.snapshot.groups
-      .filter(({ code }) => work.changedGroups.has(code))
-      .flatMap(({ countryIds }) => countryIds),
-  );
-  const qualifications = new Map(
-    work.original.groupQualifications
-      .filter(({ countryId }) => !changedCountries.has(countryId))
-      .map((qualification) => [qualification.countryId, qualification]),
-  );
-  const thirdPlaces: ReturnType<typeof calculateGroupStandings> = [];
-  let everyGroupResolved = true;
-
-  for (const group of work.snapshot.groups) {
-    const order = finalGroupOrder(work.snapshot, group);
-    if (order === null) {
-      everyGroupResolved = false;
-      if (!work.changedGroups.has(group.code)) {
-        const third = existingThirdPlace(work.snapshot, group);
-        if (third !== undefined) thirdPlaces.push(third);
-      }
-      continue;
-    }
-    qualifications.set(
-      order[0]!.countryId,
-      qualification(order[0]!.countryId, true, order[0]!.source),
-    );
-    qualifications.set(
-      order[1]!.countryId,
-      qualification(order[1]!.countryId, true, order[1]!.source),
-    );
-    qualifications.set(
-      order[3]!.countryId,
-      qualification(order[3]!.countryId, false, order[3]!.source),
-    );
-    thirdPlaces.push(order[2]!.standing);
-  }
-
-  if (everyGroupResolved && thirdPlaces.length >= 8) {
-    const result = resolveBestThirdPlaceQualifications(thirdPlaces);
-    if (result.status === "resolved")
-      for (const resolved of result.qualifications)
-        qualifications.set(resolved.countryId, resolved);
-    else
-      for (const countryId of result.guaranteedQualifications.map(
-        ({ countryId }) => countryId,
-      ))
-        qualifications.set(
-          countryId,
-          qualification(countryId, true, "calculated"),
-        );
-  }
-
-  work.snapshot.groupQualifications = work.snapshot.countries.flatMap(
-    ({ id }) => {
-      const value = qualifications.get(id);
-      return value === undefined ? [] : [value];
-    },
-  );
-}
-
-type FinalOrderRow = Readonly<{
-  countryId: CountryId;
-  standing: ReturnType<typeof calculateGroupStandings>[number];
-  source: "calculated" | "override";
-}>;
-
-function finalGroupOrder(
-  snapshot: TournamentDataSnapshot,
-  group: TournamentGroup,
-): readonly FinalOrderRow[] | null {
-  if (group.countryIds.length !== 4) return null;
-  const standings = calculateGroupStandings(group.countryIds, snapshot.matches);
-  const records = snapshot.groupOverrides
-    .filter(({ groupCode }) => groupCode === group.code)
-    .sort(
-      (left, right) => (left.officialRank ?? 0) - (right.officialRank ?? 0),
-    );
-  if (isCompleteOverride(records, group)) {
-    const byCountry = new Map(standings.map((row) => [row.countryId, row]));
-    return records.map((record) => ({
-      countryId: record.countryId,
-      standing: byCountry.get(record.countryId)!,
-      source: "override",
-    }));
-  }
-  if (!isGroupComplete(snapshot, group)) return null;
-  const ranked = rankGroupStandings(standings);
-  if (new Set(ranked.map(({ calculatedRank }) => calculatedRank)).size !== 4)
-    return null;
-  return ranked.map(({ standing }) => ({
-    countryId: standing.countryId,
-    standing,
-    source: "calculated",
-  }));
-}
-
-function isGroupComplete(
-  snapshot: TournamentDataSnapshot,
-  group: TournamentGroup,
-): boolean {
-  const completedPairs = new Set(
-    snapshot.matches.flatMap((match) => {
-      if (
-        match.stage !== "group" ||
-        match.status !== "completed" ||
-        match.homeCountryId === null ||
-        match.awayCountryId === null ||
-        !group.countryIds.includes(match.homeCountryId) ||
-        !group.countryIds.includes(match.awayCountryId)
-      )
-        return [];
-      return [[match.homeCountryId, match.awayCountryId].sort().join("|")];
-    }),
-  );
-  const expectedPairs = group.countryIds.flatMap((left, index) =>
-    group.countryIds
-      .slice(index + 1)
-      .map((right) => [left, right].sort().join("|")),
-  );
-  return (
-    expectedPairs.length === 6 &&
-    expectedPairs.every((pair) => completedPairs.has(pair))
-  );
-}
-
-function existingThirdPlace(
-  snapshot: TournamentDataSnapshot,
-  group: TournamentGroup,
-): ReturnType<typeof calculateGroupStandings>[number] | undefined {
-  const order = finalGroupOrder(snapshot, group);
-  return order?.[2]?.standing;
+  work.snapshot.groupQualifications = deriveGroupQualifications(work.snapshot, {
+    previousQualifications: work.original.groupQualifications,
+    changedGroupCodes: work.changedGroups,
+    useOverrideBoundaryResolutions: false,
+  });
 }
 
 function isCompleteOverride(
@@ -1390,14 +1260,6 @@ function validateCountries(
   for (const id of ids)
     if (id !== null && !known.has(id))
       issue(work, index, "unknown_team", `Unknown team ${id}.`);
-}
-
-function qualification(
-  countryId: CountryId,
-  qualifiedForRoundOf32: boolean,
-  source: "calculated" | "override",
-): GroupQualification {
-  return { countryId, qualifiedForRoundOf32, source };
 }
 
 function canonicalErrors(

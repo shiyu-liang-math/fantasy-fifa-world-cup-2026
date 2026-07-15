@@ -6,16 +6,14 @@ import {
   SectionHeader,
   StatusBanner,
 } from "@/components/public-ui";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getAwardsPageModel } from "@/services/page-models/awards";
 export const metadata: Metadata = {
   title: "Awards",
   description: "Golden Star, Golden Goal, and Golden Cup standings.",
 };
 export default async function AwardsPage() {
-  const result = await getAwardsPageModel(
-    createReferenceTournamentRepository(),
-  );
+  const result = await getAwardsPageModel(createPublicTournamentRepository());
   const rankingsAwaitingResults =
     result.status === "incomplete" &&
     result.data.goldenStar.every(({ value }) => value === 0) &&

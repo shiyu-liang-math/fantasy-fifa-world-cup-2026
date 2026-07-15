@@ -11,6 +11,8 @@ export type PageModelResult<T> =
   | Readonly<{ status: "incomplete"; data: T; missing: readonly string[] }>
   | Readonly<{ status: "not_found"; entity: "participant"; identifier: string }>
   | Readonly<{ status: "missing_tournament" }>
+  | Readonly<{ status: "configuration_error" }>
+  | Readonly<{ status: "unavailable" }>
   | Readonly<{ status: "invalid"; issues: readonly string[] }>;
 
 export type GoldenCupStatus = "contender" | "eliminated" | "winner";

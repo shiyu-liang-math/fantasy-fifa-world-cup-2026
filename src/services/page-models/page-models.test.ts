@@ -25,6 +25,11 @@ import { getParticipantDetailPageModel } from "./participant-detail";
 import { getRulesPageModel } from "./rules";
 import { getTournamentOverviewPageModel } from "./tournament";
 import type { PageModelResult } from "./types";
+import { SupabaseConfigurationError } from "../../config/server-environment";
+import {
+  InvalidTournamentSnapshotError,
+  TournamentRepositoryUnavailableError,
+} from "../../repositories/repository-errors";
 
 function dataOf<T>(result: PageModelResult<T>): T {
   if (
@@ -275,6 +280,36 @@ describe("page-model services", () => {
         )
       ).status,
     ).toBe("invalid");
+  });
+
+  it("distinguishes recoverable repository failures and rethrows defects", async () => {
+    const repositoryThrowing = (error: Error) => ({
+      getSnapshot: async () => {
+        throw error;
+      },
+    });
+
+    await expect(
+      getDashboardPageModel(
+        repositoryThrowing(new SupabaseConfigurationError("missing")),
+      ),
+    ).resolves.toEqual({ status: "configuration_error" });
+    await expect(
+      getDashboardPageModel(
+        repositoryThrowing(new TournamentRepositoryUnavailableError()),
+      ),
+    ).resolves.toEqual({ status: "unavailable" });
+    await expect(
+      getDashboardPageModel(
+        repositoryThrowing(new InvalidTournamentSnapshotError(["bad row"])),
+      ),
+    ).resolves.toEqual({
+      status: "invalid",
+      issues: ["The canonical tournament dataset is inconsistent."],
+    });
+    await expect(
+      getDashboardPageModel(repositoryThrowing(new TypeError("defect"))),
+    ).rejects.toThrow("defect");
   });
 });
 

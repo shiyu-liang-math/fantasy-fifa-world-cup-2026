@@ -1,6 +1,6 @@
 # Fantasy FIFA World Cup 2026
 
-Mobile-first tournament tracker for a private fantasy game. The repository contains tested tournament domain logic, typed local canonical data, read-only public pages, reviewed administration workflows, and a local PostgreSQL/Supabase persistence foundation. Public pages intentionally continue to use the local repository in Milestone 5.
+Mobile-first tournament tracker for a private fantasy game. The repository contains tested tournament domain logic, read-only Supabase-backed public pages, reviewed administration workflows, and a local PostgreSQL/Supabase persistence foundation.
 
 `PRODUCT_SPEC.md` is the authoritative product and game-rules specification.
 
@@ -22,6 +22,17 @@ npm install
 cp .env.example .env.local
 ```
 
+Configure `.env.local` with the local public values printed by
+`npx supabase status`:
+
+```dotenv
+SUPABASE_URL=http://127.0.0.1:54321
+SUPABASE_ANON_KEY=<local anonymous key>
+```
+
+These variables are server-only. The application does not use a service-role
+key and does not expose a Supabase client to browser components.
+
 Start the development server:
 
 ```bash
@@ -30,7 +41,9 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-No environment values are required by the scaffold. `.env.example` contains placeholders only.
+If either public read value is absent or malformed, public pages render a safe
+configuration message. They never substitute the local reference snapshot or
+fictional development data.
 
 ## Local database
 
@@ -73,6 +86,14 @@ To run the production build locally after `npm run build`:
 npm run start
 ```
 
-## Current scope
+## Public data flow
 
-Milestone 5 adds local Supabase configuration, versioned migrations, deterministic seeds, PostgreSQL constraints, deferred cross-row validation, private administrator/audit infrastructure, RLS, and executable database tests. It does not add Supabase application clients, authentication pages, database-backed repositories, server actions, persistent mutations, or hosted deployment.
+Public Server Components load one statement-consistent canonical graph through
+the read-only `read_tournament_snapshot` RPC. Runtime mapping validates database
+literals, references, dates, ordering, and canonical semantics before page-model
+calculations run. Development reads are request-deduplicated without persistent
+caching. Production caches only successful validated snapshots for about 60
+seconds under a tournament-specific tag.
+
+Authentication, administrator forms, persistent mutations, automated provider
+ingestion, hosted Supabase deployment, and live feeds remain out of scope.

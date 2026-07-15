@@ -7,7 +7,7 @@ import {
   StatCard,
   StatusBanner,
 } from "@/components/public-ui";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getTournamentOverviewPageModel } from "@/services/page-models/tournament";
 export const metadata: Metadata = {
   title: "Tournament",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 };
 export default async function TournamentPage() {
   const result = await getTournamentOverviewPageModel(
-    createReferenceTournamentRepository(),
+    createPublicTournamentRepository(),
   );
   return (
     <div className="space-y-8">

@@ -5,16 +5,14 @@ import {
   ResultBoundary,
   StatusBanner,
 } from "@/components/public-ui";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getBracketPageModel } from "@/services/page-models/bracket";
 export const metadata: Metadata = {
   title: "Bracket",
   description: "The official World Cup knockout bracket and source slots.",
 };
 export default async function BracketPage() {
-  const result = await getBracketPageModel(
-    createReferenceTournamentRepository(),
-  );
+  const result = await getBracketPageModel(createPublicTournamentRepository());
   return (
     <div className="space-y-8">
       <PageHeader

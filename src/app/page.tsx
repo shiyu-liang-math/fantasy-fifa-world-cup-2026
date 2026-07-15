@@ -8,7 +8,7 @@ import {
   formatNumber,
 } from "@/components/public-ui";
 import { teamPath } from "@/config/routes";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getDashboardPageModel } from "@/services/page-models/dashboard";
 import { getHomePageModel } from "@/services/page-models/home";
 
@@ -25,7 +25,7 @@ const awards = [
 ] as const;
 
 export default async function HomePage() {
-  const repository = createReferenceTournamentRepository();
+  const repository = createPublicTournamentRepository();
   const [result, dashboardResult] = await Promise.all([
     getHomePageModel(repository),
     getDashboardPageModel(repository),

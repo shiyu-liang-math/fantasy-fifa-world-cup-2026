@@ -5,16 +5,14 @@ import {
   PageHeader,
   ResultBoundary,
 } from "@/components/public-ui";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getGroupsPageModel } from "@/services/page-models/groups";
 export const metadata: Metadata = {
   title: "Groups",
   description: "Groups A through L, official standings, owners, and matches.",
 };
 export default async function GroupsPage() {
-  const result = await getGroupsPageModel(
-    createReferenceTournamentRepository(),
-  );
+  const result = await getGroupsPageModel(createPublicTournamentRepository());
   return (
     <div className="space-y-8">
       <PageHeader

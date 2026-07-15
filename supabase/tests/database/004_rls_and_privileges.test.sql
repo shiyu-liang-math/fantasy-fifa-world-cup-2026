@@ -181,6 +181,12 @@ select ok(
   has_function_privilege(
     'authenticated', 'private.is_tournament_administrator()', 'EXECUTE'
   )
+  and has_function_privilege(
+    'anon', 'public.read_tournament_snapshot(text)', 'EXECUTE'
+  )
+  and has_function_privilege(
+    'authenticated', 'public.read_tournament_snapshot(text)', 'EXECUTE'
+  )
   and not exists (
     select 1
     from pg_proc p
@@ -188,17 +194,26 @@ select ok(
     where n.nspname in ('public', 'private')
       and (
         has_function_privilege('anon', p.oid, 'EXECUTE')
+        or has_function_privilege('authenticated', p.oid, 'EXECUTE')
+      )
+      and not (
+        (
+          not has_function_privilege('anon', p.oid, 'EXECUTE')
+          and has_function_privilege('authenticated', p.oid, 'EXECUTE')
+          and n.nspname = 'private'
+          and p.proname = 'is_tournament_administrator'
+          and pg_get_function_identity_arguments(p.oid) = ''
+        )
         or (
-          has_function_privilege('authenticated', p.oid, 'EXECUTE')
-          and not (
-            n.nspname = 'private'
-            and p.proname = 'is_tournament_administrator'
-            and pg_get_function_identity_arguments(p.oid) = ''
-          )
+          has_function_privilege('anon', p.oid, 'EXECUTE')
+          and has_function_privilege('authenticated', p.oid, 'EXECUTE')
+          and n.nspname = 'public'
+          and p.proname = 'read_tournament_snapshot'
+          and pg_get_function_identity_arguments(p.oid) = 'p_tournament_id text'
         )
       )
   ),
-  'the administrator helper is the only application-role executable function'
+  'only the administrator helper and public snapshot reader are executable by application roles'
 );
 select ok(
   not exists (

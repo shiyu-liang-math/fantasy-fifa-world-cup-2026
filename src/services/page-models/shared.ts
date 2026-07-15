@@ -12,6 +12,11 @@ import type { DraftPick, ProgressionState } from "../../domain/types";
 import type { TournamentDataSnapshot } from "../../data/types";
 import { validateCanonicalData } from "../../data/validation";
 import type { TournamentRepository } from "../../repositories/tournament-repository";
+import { SupabaseConfigurationError } from "../../config/server-environment";
+import {
+  InvalidTournamentSnapshotError,
+  TournamentRepositoryUnavailableError,
+} from "../../repositories/repository-errors";
 import type {
   CountryContributionModel,
   GoldenCupStatus,
@@ -28,14 +33,34 @@ type CompetitionProjection = Readonly<{
   participants: readonly ParticipantStandingModel[];
 }>;
 
+const PUBLIC_INVALID_DATA_ISSUES = [
+  "The canonical tournament dataset is inconsistent.",
+] as const;
+
 export async function loadPageContext(
   repository: TournamentRepository,
 ): Promise<
   | Readonly<{ status: "ok"; context: PageContext }>
   | Readonly<{ status: "missing_tournament" }>
+  | Readonly<{ status: "configuration_error" }>
+  | Readonly<{ status: "unavailable" }>
   | Readonly<{ status: "invalid"; issues: readonly string[] }>
 > {
-  const snapshot = await repository.getSnapshot();
+  let snapshot: TournamentDataSnapshot;
+  try {
+    snapshot = await repository.getSnapshot();
+  } catch (error) {
+    if (error instanceof SupabaseConfigurationError) {
+      return { status: "configuration_error" };
+    }
+    if (error instanceof TournamentRepositoryUnavailableError) {
+      return { status: "unavailable" };
+    }
+    if (error instanceof InvalidTournamentSnapshotError) {
+      return { status: "invalid", issues: PUBLIC_INVALID_DATA_ISSUES };
+    }
+    throw error;
+  }
   const { tournament } = snapshot;
 
   if (tournament === null) {
@@ -46,7 +71,7 @@ export async function loadPageContext(
   const errors = issues.filter(({ severity }) => severity === "error");
 
   if (errors.length > 0) {
-    return { status: "invalid", issues: errors.map(({ message }) => message) };
+    return { status: "invalid", issues: PUBLIC_INVALID_DATA_ISSUES };
   }
 
   return {
@@ -157,6 +182,8 @@ export function resultForContext<T>(
 export function passthroughContextFailure<T>(
   result:
     | Readonly<{ status: "missing_tournament" }>
+    | Readonly<{ status: "configuration_error" }>
+    | Readonly<{ status: "unavailable" }>
     | Readonly<{ status: "invalid"; issues: readonly string[] }>,
 ): PageModelResult<T> {
   return result;

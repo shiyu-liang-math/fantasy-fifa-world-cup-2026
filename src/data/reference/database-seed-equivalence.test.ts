@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
+import { mapSupabaseSnapshot } from "../../repositories/supabase-snapshot-mapper";
 import { REFERENCE_SNAPSHOT } from "./snapshot";
 
 const databaseIt =
@@ -31,6 +32,32 @@ describe("stable database seed equivalence", () => {
       normalize(structuredClone(REFERENCE_SNAPSHOT)),
     );
   });
+
+  databaseIt(
+    "hydrates the reference snapshot through the production RPC",
+    () => {
+      const output = execFileSync(
+        "docker",
+        [
+          "exec",
+          "supabase_db_Fantasy-FIFA-World-Cup-2026",
+          "psql",
+          "-U",
+          "postgres",
+          "-d",
+          "postgres",
+          "-At",
+          "-c",
+          "select public.read_tournament_snapshot('fifa-world-cup-2026');",
+        ],
+        { encoding: "utf8" },
+      ).trim();
+
+      expect(normalize(mapSupabaseSnapshot(JSON.parse(output)))).toEqual(
+        normalize(structuredClone(REFERENCE_SNAPSHOT)),
+      );
+    },
+  );
 });
 
 function normalize(snapshot: typeof REFERENCE_SNAPSHOT) {

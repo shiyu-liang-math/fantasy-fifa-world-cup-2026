@@ -1,14 +1,14 @@
 import Link from "next/link";
 
 import { publicNavigation } from "@/config/routes";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getDashboardPageModel } from "@/services/page-models/dashboard";
 import { NavLink } from "./nav-link";
 import { TeamsMenu } from "./teams-menu";
 
 export async function SiteHeader() {
   const result = await getDashboardPageModel(
-    createReferenceTournamentRepository(),
+    createPublicTournamentRepository(),
   );
   const participants = "data" in result ? result.data.participants : [];
   return (

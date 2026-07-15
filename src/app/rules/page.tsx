@@ -7,7 +7,7 @@ import {
   formatDate,
   formatNumber,
 } from "@/components/public-ui";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getRulesPageModel } from "@/services/page-models/rules";
 export const metadata: Metadata = {
   title: "Rules",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "Draft values and Golden Star, Golden Goal, and Golden Cup rules.",
 };
 export default async function RulesPage() {
-  const result = await getRulesPageModel(createReferenceTournamentRepository());
+  const result = await getRulesPageModel(createPublicTournamentRepository());
   return (
     <div className="space-y-8">
       <PageHeader

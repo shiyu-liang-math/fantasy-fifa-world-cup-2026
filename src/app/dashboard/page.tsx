@@ -9,7 +9,7 @@ import {
   formatDate,
   formatNumber,
 } from "@/components/public-ui";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getDashboardPageModel } from "@/services/page-models/dashboard";
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 };
 export default async function DashboardPage() {
   const result = await getDashboardPageModel(
-    createReferenceTournamentRepository(),
+    createPublicTournamentRepository(),
   );
   return (
     <div className="space-y-8">

@@ -11,6 +11,22 @@ import {
 } from "./public-ui";
 
 describe("public UI semantics", () => {
+  it("renders safe recoverable repository states without internal details", () => {
+    const configuration = renderToStaticMarkup(
+      <ResultBoundary result={{ status: "configuration_error" }}>
+        {() => <p>hidden</p>}
+      </ResultBoundary>,
+    );
+    const unavailable = renderToStaticMarkup(
+      <ResultBoundary result={{ status: "unavailable" }}>
+        {() => <p>hidden</p>}
+      </ResultBoundary>,
+    );
+    expect(configuration).toContain("Tournament data is not configured");
+    expect(unavailable).toContain("temporarily unavailable");
+    expect(`${configuration}${unavailable}`).not.toContain("SUPABASE_ANON_KEY");
+  });
+
   it("renders partial data with official missing-data notices and no fictional warning", () => {
     const result: PageModelResult<{ label: string }> = {
       status: "incomplete",

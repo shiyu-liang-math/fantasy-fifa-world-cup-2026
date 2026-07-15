@@ -9,14 +9,14 @@ import {
   formatNumber,
 } from "@/components/public-ui";
 import { teamPath } from "@/config/routes";
-import { createReferenceTournamentRepository } from "@/repositories/local-tournament-repository";
+import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getDashboardPageModel } from "@/services/page-models/dashboard";
 import { getParticipantDetailPageModel } from "@/services/page-models/participant-detail";
 type Props = { params: Promise<{ participantSlug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { participantSlug } = await params;
   const result = await getParticipantDetailPageModel(
-    createReferenceTournamentRepository(),
+    createPublicTournamentRepository(),
     participantSlug,
   );
   return "data" in result
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 export default async function TeamPage({ params }: Props) {
   const { participantSlug } = await params;
-  const repository = createReferenceTournamentRepository();
+  const repository = createPublicTournamentRepository();
   const [result, dashboard] = await Promise.all([
     getParticipantDetailPageModel(repository, participantSlug),
     getDashboardPageModel(repository),

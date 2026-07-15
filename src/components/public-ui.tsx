@@ -116,6 +116,22 @@ export function ResultBoundary<T>({
         later.
       </StatusBanner>
     );
+  if (result.status === "configuration_error")
+    return (
+      <StatusBanner kind="warning" title="Tournament data is not configured">
+        The server is missing its public tournament-data configuration. Please
+        try again after setup is complete.
+      </StatusBanner>
+    );
+  if (result.status === "unavailable")
+    return (
+      <StatusBanner
+        kind="warning"
+        title="Tournament data is temporarily unavailable"
+      >
+        The official data service could not be reached. Please try again soon.
+      </StatusBanner>
+    );
   if (result.status === "invalid")
     return (
       <StatusBanner kind="error" title="Data could not be displayed">
