@@ -1,6 +1,6 @@
 # Fantasy FIFA World Cup 2026
 
-Mobile-first tournament tracker for a private fantasy game. This repository currently contains only the application scaffold; tournament data, scoring logic, database access, and administrator authentication are intentionally not implemented yet.
+Mobile-first tournament tracker for a private fantasy game. The repository contains tested tournament domain logic, typed local canonical data, read-only public pages, reviewed administration workflows, and a local PostgreSQL/Supabase persistence foundation. Public pages intentionally continue to use the local repository in Milestone 5.
 
 `PRODUCT_SPEC.md` is the authoritative product and game-rules specification.
 
@@ -8,6 +8,7 @@ Mobile-first tournament tracker for a private fantasy game. This repository curr
 
 - Node.js 24 LTS
 - npm 11
+- Docker Desktop or a compatible Docker Engine with Compose v2
 
 The scaffold was verified with Node.js 24.18.0 and npm 11.16.0.
 
@@ -31,10 +32,29 @@ Open [http://localhost:3000](http://localhost:3000).
 
 No environment values are required by the scaffold. `.env.example` contains placeholders only.
 
+## Local database
+
+The Supabase CLI is pinned as a development dependency. Start the local stack and rebuild the database from all migrations and the stable seed:
+
+```bash
+npx supabase start
+npm run db:reset
+```
+
+Run database, RLS, and seed-equivalence checks:
+
+```bash
+npm run test:db
+npm run test:db-equivalence
+```
+
+See [docs/database.md](docs/database.md) for the schema, security boundary, seed separation, administrator bootstrap, and troubleshooting details.
+
 ## Checks
 
 ```bash
 npm test
+npm run db:verify
 npm run lint
 npm run typecheck
 npm run format:check
@@ -55,4 +75,4 @@ npm run start
 
 ## Current scope
 
-The scaffold includes the Next.js App Router, strict TypeScript, Tailwind CSS, shared navigation, placeholder routes, Vitest, ESLint, and Prettier. It does not include Supabase, a database schema, authentication, tournament data, or game calculations.
+Milestone 5 adds local Supabase configuration, versioned migrations, deterministic seeds, PostgreSQL constraints, deferred cross-row validation, private administrator/audit infrastructure, RLS, and executable database tests. It does not add Supabase application clients, authentication pages, database-backed repositories, server actions, persistent mutations, or hosted deployment.

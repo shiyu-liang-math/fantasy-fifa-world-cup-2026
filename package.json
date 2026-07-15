@@ -13,6 +13,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
+    "test:db": "supabase test db",
+    "test:db-equivalence": "vitest run src/data/reference/database-seed-equivalence.test.ts",
+    "db:reset": "supabase db reset",
+    "db:verify": "npm run db:reset && npm run test:db && npm run test:db-equivalence",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -29,6 +33,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.2.10",
     "prettier": "^3.9.5",
+    "supabase": "2.109.1",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3",
     "vitest": "^4.1.10"
