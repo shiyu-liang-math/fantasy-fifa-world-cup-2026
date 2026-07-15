@@ -24,8 +24,6 @@ insert into public.matches (
     'france', 'spain', 2, 1, false, null, null, null),
   ('fifa-world-cup-2026', 'cross-group', 'group', 'group', 3002, 'completed',
     'france', 'brazil', 1, 0, false, null, null, null),
-  ('fifa-world-cup-2026', 'group-shootout', 'group', 'group', 3003, 'completed',
-    'portugal', 'argentina', 1, 1, true, 5, 4, null),
   ('fifa-world-cup-2026', 'group-advancing', 'group', 'group', 3004, 'completed',
     'brazil', 'germany', 2, 1, false, null, null, 'brazil'),
   ('fifa-world-cup-2026', 'valid-knockout', 'round-of-32', 'round_of_32', 3005, 'completed',
@@ -65,8 +63,15 @@ select throws_ok(
   'cross-group fixtures are rejected'
 );
 select throws_ok(
-  $$select private.validate_match('fifa-world-cup-2026', 'group-shootout')$$,
-  'P0001', 'Group match group-shootout cannot contain a shootout.',
+  $$insert into public.matches (
+      tournament_id, id, round_id, stage, match_number, status,
+      home_country_id, away_country_id, home_goals, away_goals,
+      went_to_extra_time, home_shootout_goals, away_shootout_goals
+    ) values (
+      'fifa-world-cup-2026', 'group-shootout', 'group', 'group', 3003,
+      'completed', 'portugal', 'argentina', 1, 1, true, 5, 4
+    )$$,
+  '23514', null,
   'group matches cannot use shootouts'
 );
 select throws_ok(

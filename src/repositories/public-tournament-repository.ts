@@ -3,7 +3,7 @@ import "server-only";
 import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { connection } from "next/server";
-import { readSupabaseServerEnvironment } from "../config/server-environment";
+import { readSupabaseServerEnvironment } from "../config/server-environment-runtime";
 import { CANONICAL_TOURNAMENT_ID } from "../config/tournament";
 import { createServerSupabaseClient } from "../lib/supabase/server";
 import type { TournamentDataSnapshot } from "../data/types";

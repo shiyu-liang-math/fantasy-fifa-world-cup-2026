@@ -42,6 +42,28 @@ describe("match validation", () => {
     ).toEqual([]);
   });
 
+  it.each(["scheduled", "live", "postponed", "cancelled"] as const)(
+    "rejects result fields on a %s match",
+    (status) => {
+      expect(
+        codes(
+          match({
+            status,
+            homeGoals: 1,
+            awayGoals: 0,
+            wentToExtraTime: true,
+          }),
+        ),
+      ).toContain("result_before_completion");
+    },
+  );
+
+  it("rejects extra time in a group match", () => {
+    expect(codes(match({ stage: "group", wentToExtraTime: true }))).toContain(
+      "group_extra_time",
+    );
+  });
+
   it.each([
     ["negative", { homeGoals: -1 }],
     ["fractional", { awayGoals: 1.5 }],
@@ -156,7 +178,14 @@ describe("match validation", () => {
       ),
     ).toEqual([]);
     expect(
-      codes(match({ status: "live", advancingCountryId: "home" })),
+      codes(
+        match({
+          status: "live",
+          homeGoals: null,
+          awayGoals: null,
+          advancingCountryId: "home",
+        }),
+      ),
     ).toContain("advancement_before_completion");
   });
 

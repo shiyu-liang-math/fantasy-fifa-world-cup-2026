@@ -1,6 +1,12 @@
 import { execFileSync } from "node:child_process";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("server-only", () => ({}));
+
 import { mapSupabaseSnapshot } from "../../repositories/supabase-snapshot-mapper";
+import { compareGroupOverrideEntries } from "../../domain/group-override-entry";
+import { prepareAdministrationUpdate } from "../../domain/admin/workflow";
+import { createAdministrationReviewEnvelope } from "../../services/administration/review-envelope";
 import { REFERENCE_SNAPSHOT } from "./snapshot";
 
 const databaseIt =
@@ -58,7 +64,111 @@ describe("stable database seed equivalence", () => {
       );
     },
   );
+
+  databaseIt(
+    "round-trips a reviewed override through the production mutation and snapshot RPCs",
+    () => {
+      const actor = "75555555-5555-4555-8555-555555555555";
+      const context = JSON.parse(
+        psql(`
+          begin;
+          insert into auth.users (id) values ('${actor}');
+          insert into private.administrator_allowlist (user_id) values ('${actor}');
+          insert into public.group_memberships (tournament_id, group_code, country_id, display_order) values
+            ('fifa-world-cup-2026','A','france',1),
+            ('fifa-world-cup-2026','A','spain',2),
+            ('fifa-world-cup-2026','A','portugal',3),
+            ('fifa-world-cup-2026','A','argentina',4);
+          set local "request.jwt.claim.sub" = '${actor}';
+          set local role authenticated;
+          select public.read_administration_context('fifa-world-cup-2026');
+          rollback;
+        `),
+      ) as { revision: string; snapshot: unknown };
+      const current = mapSupabaseSnapshot(context.snapshot);
+      const group = current.groups[0]!;
+      const proposal = prepareAdministrationUpdate(current, {
+        type: "set_group_override",
+        override: {
+          id: 'round-trip:-"雪',
+          groupCode: group.code,
+          orderedCountryIds: [...group.countryIds].reverse(),
+          reason: "Round-trip equivalence",
+          source: "FIFA",
+        },
+      });
+      expect(proposal.safeToApply).toBe(true);
+      const review = createAdministrationReviewEnvelope({
+        tournamentId: current.tournament!.id,
+        databaseRevision: context.revision,
+        changeSetId: "75555555-5555-4555-8555-555555555556",
+        issuedAt: "2026-07-15T00:00:00.000Z",
+        expiresAt: "2026-07-15T00:15:00.000Z",
+        proposal,
+        signingSecret: "0123456789abcdef0123456789abcdef",
+      });
+      const output = psql(`
+        begin;
+        insert into auth.users (id) values ('${actor}');
+        insert into private.administrator_allowlist (user_id) values ('${actor}');
+        insert into public.group_memberships (tournament_id, group_code, country_id, display_order) values
+          ('fifa-world-cup-2026','A','france',1),
+          ('fifa-world-cup-2026','A','spain',2),
+          ('fifa-world-cup-2026','A','portugal',3),
+          ('fifa-world-cup-2026','A','argentina',4);
+        set local "request.jwt.claim.sub" = '${actor}';
+        set local role authenticated;
+        select public.apply_administration_change(
+          ${sqlText(review.tournamentId)}, ${sqlText(review.baseRevision)}::bigint,
+          ${sqlText(review.changeSetId)}::uuid, ${sqlText(JSON.stringify(review.commands))}::jsonb,
+          ${sqlText(review.signature)}
+        );
+        select public.read_tournament_snapshot(${sqlText(review.tournamentId)});
+        rollback;
+      `).split("\n");
+      expect(JSON.parse(output[0]!) as { status: string }).toMatchObject({
+        status: "applied",
+      });
+      const reloaded = mapSupabaseSnapshot(JSON.parse(output[1]!));
+      expect(normalizeOperational(reloaded)).toEqual(
+        normalizeOperational(proposal.proposedSnapshot!),
+      );
+    },
+  );
 });
+
+function psql(sql: string): string {
+  return execFileSync(
+    "docker",
+    [
+      "exec",
+      "supabase_db_Fantasy-FIFA-World-Cup-2026",
+      "psql",
+      "-U",
+      "postgres",
+      "-d",
+      "postgres",
+      "-qAt",
+      "-c",
+      sql,
+    ],
+    { encoding: "utf8" },
+  ).trim();
+}
+
+function sqlText(value: string): string {
+  return `'${value.replaceAll("'", "''")}'`;
+}
+
+function normalizeOperational(snapshot: typeof REFERENCE_SNAPSHOT) {
+  return {
+    ...snapshot,
+    tournament:
+      snapshot.tournament === null
+        ? null
+        : { ...snapshot.tournament, lastUpdatedAt: "database-managed" },
+  };
+}
 
 function normalize(snapshot: typeof REFERENCE_SNAPSHOT) {
   return {
@@ -84,8 +194,8 @@ function normalize(snapshot: typeof REFERENCE_SNAPSHOT) {
     groupQualifications: [...snapshot.groupQualifications].sort((left, right) =>
       left.countryId.localeCompare(right.countryId),
     ),
-    groupOverrides: [...snapshot.groupOverrides].sort((left, right) =>
-      left.id.localeCompare(right.id),
+    groupOverrides: [...snapshot.groupOverrides].sort(
+      compareGroupOverrideEntries,
     ),
   };
 }
@@ -215,7 +325,7 @@ select jsonb_build_object(
   'groupQualifications', '[]'::jsonb,
   'groupOverrides', (
     select coalesce(jsonb_agg(jsonb_strip_nulls(jsonb_build_object(
-      'id', s.id || '-' || e.country_id,
+      'id', '[' || to_json(s.id)::text || ',' || to_json(e.tournament_id)::text || ',' || to_json(e.group_code)::text || ',' || to_json(e.country_id)::text || ']',
       'setId', s.id,
       'tournamentId', e.tournament_id,
       'groupCode', e.group_code,
@@ -224,7 +334,8 @@ select jsonb_build_object(
       'qualifiedForRoundOf32', e.qualified_for_round_of_32,
       'reason', s.reason,
       'source', s.source
-    )) order by s.id, e.country_id), '[]'::jsonb)
+    )) order by e.official_rank, e.country_id,
+      '[' || to_json(s.id)::text || ',' || to_json(e.tournament_id)::text || ',' || to_json(e.group_code)::text || ',' || to_json(e.country_id)::text || ']'), '[]'::jsonb)
     from public.group_override_entries e
     join public.group_override_sets s
       on (s.id, s.tournament_id, s.group_code) =

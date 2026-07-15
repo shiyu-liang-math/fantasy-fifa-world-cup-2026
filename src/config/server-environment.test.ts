@@ -1,8 +1,42 @@
 import { describe, expect, it } from "vitest";
 import {
+  parseAdministrationPreviewEnvironment,
   parseSupabaseServerEnvironment,
   SupabaseConfigurationError,
 } from "./server-environment";
+
+describe("parseAdministrationPreviewEnvironment", () => {
+  it("accepts at least 32 bytes of server-only signing material", () => {
+    expect(
+      parseAdministrationPreviewEnvironment({
+        ADMIN_PREVIEW_SIGNING_SECRET: "0123456789abcdef0123456789abcdef",
+      }),
+    ).toEqual({ signingSecret: "0123456789abcdef0123456789abcdef" });
+  });
+
+  it("rejects missing and short secrets without exposing their contents", () => {
+    for (const value of [undefined, "too-short"]) {
+      expect(() =>
+        parseAdministrationPreviewEnvironment({
+          ADMIN_PREVIEW_SIGNING_SECRET: value,
+        }),
+      ).toThrow("at least 32 bytes");
+    }
+  });
+
+  it("counts UTF-8 bytes and ignores browser-prefixed values", () => {
+    expect(
+      parseAdministrationPreviewEnvironment({
+        ADMIN_PREVIEW_SIGNING_SECRET: "🔐".repeat(8),
+      }).signingSecret,
+    ).toBe("🔐".repeat(8));
+    expect(() =>
+      parseAdministrationPreviewEnvironment({
+        NEXT_PUBLIC_ADMIN_PREVIEW_SIGNING_SECRET: "x".repeat(64),
+      }),
+    ).toThrow("ADMIN_PREVIEW_SIGNING_SECRET");
+  });
+});
 
 describe("parseSupabaseServerEnvironment", () => {
   it("validates and normalizes server-only public read configuration", () => {

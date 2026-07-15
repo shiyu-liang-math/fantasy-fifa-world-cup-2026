@@ -11,6 +11,10 @@ import type {
   TournamentRound,
 } from "../data/types";
 import { validateCanonicalData } from "../data/validation";
+import {
+  compareGroupOverrideEntries,
+  groupOverrideEntryId,
+} from "../domain/group-override-entry";
 import { InvalidTournamentSnapshotError } from "./repository-errors";
 
 const GROUP_CODES = [
@@ -361,7 +365,12 @@ export function mapSupabaseSnapshot(payload: unknown): TournamentDataSnapshot {
           `Override entry ${entry.setId} contradicts the country group membership.`,
         );
       const result: GroupQualificationOverrideRecord = {
-        id: `${entry.setId}-${entry.countryId}`,
+        id: groupOverrideEntryId(
+          entry.setId,
+          entry.tournamentId,
+          entry.groupCode,
+          entry.countryId,
+        ),
         setId: entry.setId,
         tournamentId: entry.tournamentId,
         groupCode: entry.groupCode,
@@ -454,9 +463,7 @@ export function mapSupabaseSnapshot(payload: unknown): TournamentDataSnapshot {
       (a, b) => a.matchNumber - b.matchNumber || a.id.localeCompare(b.id),
     ),
     groupQualifications: [],
-    groupOverrides: [...groupOverrides].sort((a, b) =>
-      a.id.localeCompare(b.id),
-    ),
+    groupOverrides: [...groupOverrides].sort(compareGroupOverrideEntries),
     rules: {
       version: text(tournamentRow.rules_version, "tournament.rules_version"),
       updatedAt: date(

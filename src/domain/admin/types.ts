@@ -36,7 +36,6 @@ export type GroupOverrideInput = Readonly<{
 }>;
 
 export type TournamentMetadataUpdate = Readonly<{
-  lastUpdatedAt?: string;
   status?: "planned" | "active" | "completed";
   currentRoundId?: string | null;
   referenceDataComplete?: boolean;

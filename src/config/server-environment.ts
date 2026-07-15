@@ -3,6 +3,10 @@ export type SupabaseServerEnvironment = Readonly<{
   anonymousKey: string;
 }>;
 
+export type AdministrationPreviewEnvironment = Readonly<{
+  signingSecret: string;
+}>;
+
 export class SupabaseConfigurationError extends Error {
   constructor(message: string) {
     super(message);
@@ -39,8 +43,19 @@ export function parseSupabaseServerEnvironment(
   return { url: url.toString().replace(/\/$/, ""), anonymousKey };
 }
 
-export function readSupabaseServerEnvironment(): SupabaseServerEnvironment {
-  return parseSupabaseServerEnvironment(process.env);
+export function parseAdministrationPreviewEnvironment(
+  environment: Readonly<Record<string, string | undefined>>,
+): AdministrationPreviewEnvironment {
+  const signingSecret = environment.ADMIN_PREVIEW_SIGNING_SECRET;
+  if (
+    signingSecret === undefined ||
+    Buffer.byteLength(signingSecret, "utf8") < 32
+  ) {
+    throw new SupabaseConfigurationError(
+      "ADMIN_PREVIEW_SIGNING_SECRET must contain at least 32 bytes.",
+    );
+  }
+  return { signingSecret };
 }
 
 function isPublicAnonymousKey(key: string): boolean {

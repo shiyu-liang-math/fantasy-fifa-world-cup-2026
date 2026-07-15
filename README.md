@@ -28,10 +28,13 @@ Configure `.env.local` with the local public values printed by
 ```dotenv
 SUPABASE_URL=http://127.0.0.1:54321
 SUPABASE_ANON_KEY=<local anonymous key>
+ADMIN_PREVIEW_SIGNING_SECRET=<at least 32 bytes of unpredictable secret material>
 ```
 
-These variables are server-only. The application does not use a service-role
-key and does not expose a Supabase client to browser components.
+These variables are server-only. `ADMIN_PREVIEW_SIGNING_SECRET` signs
+serializable administrator reviews and is read only when review work executes,
+so builds do not require it. The application does not use a service-role key
+and does not expose a Supabase client to browser components.
 
 Start the development server:
 
@@ -95,5 +98,15 @@ calculations run. Development reads are request-deduplicated without persistent
 caching. Production caches only successful validated snapshots for about 60
 seconds under a tournament-specific tag.
 
-Authentication, administrator forms, persistent mutations, automated provider
-ingestion, hosted Supabase deployment, and live feeds remain out of scope.
+Milestone 7A adds the signed review model and the authenticated, revision-locked,
+idempotent, audited PostgreSQL mutation boundary. Cookie sessions, sign-in,
+protected administrator routes, forms, cache invalidation wiring, automated
+provider ingestion, hosted deployment, and live feeds remain out of scope.
+
+The signed two-step preview is enforced by the server application. An
+authenticated, UUID-allowlisted administrator can deliberately call the apply
+RPC directly and bypass that screen, but cannot bypass authorization, strict
+command validation, revision and idempotency locking, canonical constraints,
+transactional rollback, propagation, or audit attribution. This is an accepted
+limitation for the private single-administrator deployment; no service-role key
+is used.

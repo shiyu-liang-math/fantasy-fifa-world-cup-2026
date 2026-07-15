@@ -4,6 +4,8 @@ import { createHash } from "node:crypto";
 import { FICTIONAL_DEVELOPMENT_SNAPSHOT } from "../../data/development/scenario";
 import type { TournamentDataSnapshot } from "../../data/types";
 import { LocalTournamentRepository } from "../../repositories/local-tournament-repository";
+import { mapSupabaseSnapshot } from "../../repositories/supabase-snapshot-mapper";
+import { snapshotPayload } from "../../repositories/supabase-snapshot-test-fixture";
 import { getAwardsPageModel } from "../../services/page-models/awards";
 import { getBracketPageModel } from "../../services/page-models/bracket";
 import { getDashboardPageModel } from "../../services/page-models/dashboard";
@@ -148,13 +150,31 @@ describe("reviewed administration workflow", () => {
       ...original,
       tournament: {
         ...original.tournament!,
-        lastUpdatedAt: "2026-07-20T00:00:00.000Z",
+        status: "planned" as const,
       },
     };
     expect(applyAdministrationProposal(changed, proposal)).toMatchObject({
       status: "rejected",
       code: "stale_proposal",
     });
+  });
+
+  it("does not treat database-managed lastUpdatedAt as business-state drift", () => {
+    const original = snapshot();
+    const proposal = prepareAdministrationUpdate(
+      original,
+      fixture("operational-time-fixture", 1198, "france", "portugal"),
+    );
+    const current = {
+      ...original,
+      tournament: {
+        ...original.tournament!,
+        lastUpdatedAt: "2026-07-20T00:00:00.000Z",
+      },
+    };
+    expect(applyAdministrationProposal(current, proposal).status).toBe(
+      "applied",
+    );
   });
 
   it("validates a batch atomically and exposes no partial snapshot", () => {
@@ -412,7 +432,7 @@ describe("reviewed administration workflow", () => {
       ...original,
       tournament: {
         ...original.tournament!,
-        lastUpdatedAt: "2026-07-22T00:00:00.000Z",
+        status: "planned" as const,
       },
     };
 
@@ -462,6 +482,67 @@ describe("reviewed administration workflow", () => {
     expect(proposal.proposedSnapshot).toBeNull();
   });
 
+  it("enforces the reviewed same-match command matrix", () => {
+    const knockoutFixture: AdministrationCommand = {
+      type: "upsert_fixture",
+      fixture: {
+        id: "matrix-match",
+        roundId: "round-of-32",
+        matchNumber: 1991,
+        scheduledAt: null,
+        homeCountryId: "france",
+        awayCountryId: "spain",
+      },
+    };
+    const result: AdministrationCommand = {
+      type: "record_result",
+      result: {
+        matchId: "matrix-match",
+        homeGoals: 1,
+        awayGoals: 0,
+        advancingCountryId: "france",
+      },
+    };
+    const participants: AdministrationCommand = {
+      type: "set_knockout_participants",
+      matchId: "matrix-match",
+      homeCountryId: "portugal",
+      awayCountryId: "argentina",
+    };
+
+    expect(
+      prepareAdministrationUpdate(snapshot(), [knockoutFixture, result])
+        .safeToApply,
+    ).toBe(true);
+    for (const commands of [
+      [knockoutFixture, participants],
+      [participants, knockoutFixture],
+      [result, participants],
+      [participants, result],
+    ]) {
+      expect(
+        prepareAdministrationUpdate(snapshot(), commands).errors.map(
+          ({ code }) => code,
+        ),
+      ).toContain("conflicting_commands");
+    }
+  });
+
+  it("constructs override entries identically to persisted hydration", () => {
+    const proposal = prepareAdministrationUpdate(
+      snapshot(),
+      completeOverride('override:-"雪'),
+    );
+    expect(proposal.safeToApply).toBe(true);
+    const proposed = proposal.proposedSnapshot!;
+    expect(
+      mapSupabaseSnapshot(snapshotPayload(proposed)).groupOverrides,
+    ).toEqual(proposed.groupOverrides);
+    expect(
+      proposed.groupOverrides.map(({ officialRank }) => officialRank),
+    ).toEqual([1, 2, 3, 4]);
+  });
+
   it("rejects unknown runtime command types cleanly", () => {
     const proposal = prepareAdministrationUpdate(snapshot(), {
       type: "not-a-command",
@@ -498,7 +579,7 @@ describe("reviewed administration workflow", () => {
     } satisfies TournamentDataSnapshot;
     const proposal = prepareAdministrationUpdate(duplicate, {
       type: "update_tournament_metadata",
-      update: { lastUpdatedAt: "2026-07-23T00:00:00.000Z" },
+      update: { missingOfficialData: ["Pending verification"] },
     });
     expect(proposal.errors.map(({ code }) => code)).toContain(
       "duplicate_group_fixture",
@@ -551,7 +632,7 @@ describe("reviewed administration workflow", () => {
     const original = groupAlmostCompleteSnapshot();
     const before = prepareAdministrationUpdate(original, {
       type: "update_tournament_metadata",
-      update: { lastUpdatedAt: "2026-07-20T00:00:00.000Z" },
+      update: { missingOfficialData: ["Pending verification"] },
     });
     expect(
       before.proposedSnapshot?.groupQualifications.some(
@@ -849,7 +930,6 @@ describe("reviewed administration workflow", () => {
     const proposal = prepareAdministrationUpdate(snapshot(), {
       type: "update_tournament_metadata",
       update: {
-        lastUpdatedAt: "2026-07-21T00:00:00.000Z",
         status: "active",
         currentRoundId: "round-of-16",
         missingOfficialData: ["Final official match reports"],
@@ -857,13 +937,24 @@ describe("reviewed administration workflow", () => {
     });
     expect(proposal.safeToApply).toBe(true);
     expect(proposal.proposedSnapshot?.tournament).toMatchObject({
-      lastUpdatedAt: "2026-07-21T00:00:00.000Z",
       status: "active",
       currentRoundId: "round-of-16",
       missingOfficialData: ["Final official match reports"],
     });
     expect(proposal.affected.tournamentMetadataChanged).toBe(true);
     expect(proposal.summary).toContain("Tournament metadata changed.");
+  });
+
+  it("rejects a semantically unchanged metadata update", () => {
+    const original = snapshot();
+    const proposal = prepareAdministrationUpdate(original, {
+      type: "update_tournament_metadata",
+      update: { status: original.tournament!.status },
+    });
+    expect(proposal.safeToApply).toBe(false);
+    expect(proposal.errors.map(({ code }) => code)).toContain(
+      "no_op_metadata_update",
+    );
   });
 
   it("matches fixed complete public page-model baselines", async () => {

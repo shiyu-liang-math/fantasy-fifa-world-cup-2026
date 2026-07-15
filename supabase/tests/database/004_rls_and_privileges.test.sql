@@ -211,9 +211,24 @@ select ok(
           and p.proname = 'read_tournament_snapshot'
           and pg_get_function_identity_arguments(p.oid) = 'p_tournament_id text'
         )
+        or (
+          not has_function_privilege('anon', p.oid, 'EXECUTE')
+          and has_function_privilege('authenticated', p.oid, 'EXECUTE')
+          and n.nspname = 'public'
+          and p.proname = 'read_administration_context'
+          and pg_get_function_identity_arguments(p.oid) = 'p_tournament_id text'
+        )
+        or (
+          not has_function_privilege('anon', p.oid, 'EXECUTE')
+          and has_function_privilege('authenticated', p.oid, 'EXECUTE')
+          and n.nspname = 'public'
+          and p.proname = 'apply_administration_change'
+          and pg_get_function_identity_arguments(p.oid) =
+            'p_tournament_id text, p_expected_revision bigint, p_change_set_id uuid, p_commands jsonb, p_review_fingerprint text'
+        )
       )
   ),
-  'only the administrator helper and public snapshot reader are executable by application roles'
+  'only the reviewed public and administrator functions are executable by application roles'
 );
 select ok(
   not exists (

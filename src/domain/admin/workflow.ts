@@ -11,6 +11,10 @@ import type {
 } from "../../data/types";
 import type { CountryId, MatchId } from "../types";
 import { deriveCompetition } from "../../services/page-models/shared";
+import {
+  compareGroupOverrideEntries,
+  groupOverrideEntryId,
+} from "../group-override-entry";
 import type {
   AdministrationAffectedData,
   AdministrationCommand,
@@ -44,7 +48,7 @@ const reviewedProposals = new WeakMap<AdministrationProposal, string>();
  * 32-bit label is not an authentication or cryptographic authorization boundary.
  */
 function tournamentRevision(snapshot: TournamentDataSnapshot): string {
-  return revisionOf(snapshot);
+  return revisionOf(normalizePersistenceManagedSnapshot(snapshot));
 }
 
 /**
@@ -129,7 +133,13 @@ export function prepareAdministrationUpdate(
   };
   const proposal: AdministrationProposal = {
     ...proposalCore,
-    proposalRevision: revisionOf(proposalCore),
+    proposalRevision: revisionOf({
+      ...proposalCore,
+      proposedSnapshot:
+        proposalCore.proposedSnapshot === null
+          ? null
+          : normalizePersistenceManagedSnapshot(proposalCore.proposedSnapshot),
+    }),
   };
   reviewedProposals.set(proposal, stableStringify(proposal));
   return deepFreeze(proposal);
@@ -171,7 +181,8 @@ export function applyAdministrationProposal(
     proposal.commandsRevision !== recomputed.commandsRevision ||
     proposal.resultRevision !== recomputed.resultRevision ||
     proposal.proposalRevision !== recomputed.proposalRevision ||
-    stableStringify(proposal) !== stableStringify(recomputed)
+    stableStringify(normalizeProposalForBusinessIdentity(proposal)) !==
+      stableStringify(normalizeProposalForBusinessIdentity(recomputed))
   ) {
     return rejected("proposal_tampered", [
       applicationIssue(
@@ -275,6 +286,27 @@ function preflightConflicts(
       }
     }
   });
+
+  for (const target of fixtures.keys()) {
+    const participantIndex = participants.get(target);
+    if (participantIndex !== undefined)
+      issue(
+        work,
+        participantIndex,
+        "conflicting_commands",
+        `A fixture and participant command both write ${target}.`,
+      );
+  }
+  for (const target of results.keys()) {
+    const participantIndex = participants.get(target);
+    if (participantIndex !== undefined)
+      issue(
+        work,
+        participantIndex,
+        "conflicting_commands",
+        `A result and participant command both write ${target}.`,
+      );
+  }
 }
 
 function applyCommand(
@@ -581,7 +613,12 @@ function setOverride(
   if (hasCommandError(work, index)) return;
   const records: GroupQualificationOverrideRecord[] =
     input.orderedCountryIds.map((countryId, rank) => ({
-      id: `${input.id}:${rank + 1}`,
+      id: groupOverrideEntryId(
+        input.id,
+        work.snapshot.tournament?.id ?? "",
+        input.groupCode,
+        countryId,
+      ),
       setId: input.id,
       tournamentId: work.snapshot.tournament?.id ?? "",
       groupCode: input.groupCode,
@@ -590,7 +627,10 @@ function setOverride(
       reason: input.reason,
       source: input.source,
     }));
-  work.snapshot.groupOverrides = [...work.snapshot.groupOverrides, ...records];
+  work.snapshot.groupOverrides = [
+    ...work.snapshot.groupOverrides,
+    ...records,
+  ].sort(compareGroupOverrideEntries);
   work.changedGroups.add(input.groupCode);
 }
 
@@ -744,16 +784,6 @@ function updateTournamentMetadata(
     return;
   }
   if (
-    update.lastUpdatedAt !== undefined &&
-    !isIsoDateString(update.lastUpdatedAt)
-  )
-    issue(
-      work,
-      index,
-      "invalid_last_updated_at",
-      "lastUpdatedAt must be a valid ISO date string.",
-    );
-  if (
     update.status !== undefined &&
     update.status !== "planned" &&
     update.status !== "active" &&
@@ -778,6 +808,22 @@ function updateTournamentMetadata(
     );
   if (Object.keys(update).length === 0)
     issue(work, index, "empty_metadata_update", "Metadata update is empty.");
+  const changesBusinessState =
+    (update.status !== undefined && update.status !== tournament.status) ||
+    (update.currentRoundId !== undefined &&
+      update.currentRoundId !== tournament.currentRoundId) ||
+    (update.referenceDataComplete !== undefined &&
+      update.referenceDataComplete !== tournament.referenceDataComplete) ||
+    (update.missingOfficialData !== undefined &&
+      stableStringify(update.missingOfficialData) !==
+        stableStringify(tournament.missingOfficialData));
+  if (Object.keys(update).length > 0 && !changesBusinessState)
+    issue(
+      work,
+      index,
+      "no_op_metadata_update",
+      "Metadata update does not change canonical business state.",
+    );
   if (hasCommandError(work, index)) return;
   work.snapshot.tournament = {
     ...tournament,
@@ -786,6 +832,37 @@ function updateTournamentMetadata(
       update.missingOfficialData === undefined
         ? tournament.missingOfficialData
         : [...update.missingOfficialData],
+  };
+}
+
+/**
+ * Persistence revision and lastUpdatedAt are database-managed operational
+ * fields. Administration proposal identities deliberately cover every other
+ * canonical field while excluding those two values.
+ */
+function normalizePersistenceManagedSnapshot(
+  snapshot: TournamentDataSnapshot,
+): unknown {
+  return snapshot.tournament === null
+    ? snapshot
+    : {
+        ...snapshot,
+        tournament: {
+          ...snapshot.tournament,
+          lastUpdatedAt: "database-managed",
+        },
+      };
+}
+
+function normalizeProposalForBusinessIdentity(
+  proposal: AdministrationProposal,
+): unknown {
+  return {
+    ...proposal,
+    proposedSnapshot:
+      proposal.proposedSnapshot === null
+        ? null
+        : normalizePersistenceManagedSnapshot(proposal.proposedSnapshot),
   };
 }
 
@@ -1341,12 +1418,6 @@ function registerConflictTarget(
   else targets.set(target, index);
 }
 
-function isIsoDateString(value: string): boolean {
-  return (
-    !Number.isNaN(Date.parse(value)) && new Date(value).toISOString() === value
-  );
-}
-
 function revisionOf(value: unknown): string {
   const canonical = stableStringify(value);
   let hash = 0x811c9dc5;
@@ -1363,7 +1434,7 @@ function stableStringify(value: unknown): string {
     return JSON.stringify(value) ?? "undefined";
   if (Array.isArray(value)) return `[${value.map(stableStringify).join(",")}]`;
   return `{${Object.entries(value as Record<string, unknown>)
-    .sort(([left], [right]) => left.localeCompare(right))
+    .sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0))
     .map(([key, child]) => `${JSON.stringify(key)}:${stableStringify(child)}`)
     .join(",")}}`;
 }

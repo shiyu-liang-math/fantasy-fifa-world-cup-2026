@@ -59,6 +59,14 @@ export function validateMatch(match: DomainMatch): ValidationIssue[] {
     });
   }
 
+  if (isGroupMatch && match.wentToExtraTime) {
+    issues.push({
+      code: "group_extra_time",
+      field: "wentToExtraTime",
+      message: "Group-stage matches cannot use extra time.",
+    });
+  }
+
   if (isGroupMatch && match.advancingCountryId !== null) {
     issues.push({
       code: "group_advancing_country",
@@ -81,6 +89,18 @@ export function validateMatch(match: DomainMatch): ValidationIssue[] {
   }
 
   if (!isCompletedMatch(match)) {
+    if (
+      match.homeGoals !== null ||
+      match.awayGoals !== null ||
+      match.wentToExtraTime ||
+      hasHomeShootout ||
+      hasAwayShootout
+    ) {
+      issues.push({
+        code: "result_before_completion",
+        message: "Only a completed match may contain official result fields.",
+      });
+    }
     if (match.advancingCountryId !== null) {
       issues.push({
         code: "advancement_before_completion",

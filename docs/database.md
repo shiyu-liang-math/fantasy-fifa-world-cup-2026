@@ -2,7 +2,8 @@
 
 The local PostgreSQL/Supabase foundation stores canonical tournament data and
 provides the read interface used by the Next.js public application. Persistent
-administrator mutations remain deferred.
+administrator mutations cross the reviewed Milestone 7A RPC boundary; the
+session and administrator UI remain deferred.
 
 ## Prerequisites
 
@@ -42,6 +43,9 @@ npx supabase stop
 5. `20260713000500_rls_and_privileges.sql` creates immutable-UUID administrator recognition, explicit read grants, RLS, and browser-role write denial.
 6. `20260714000100_public_snapshot_read.sql` adds the narrowly granted,
    statement-consistent public snapshot function.
+7. `20260715000100_administrator_mutation_foundation.sql` strengthens result
+   state constraints and adds authenticated administration-context and atomic
+   reviewed-mutation RPCs.
 
 ## Application read configuration
 
@@ -50,13 +54,16 @@ The server requires these runtime values:
 ```dotenv
 SUPABASE_URL=http://127.0.0.1:54321
 SUPABASE_ANON_KEY=<local anonymous key>
+ADMIN_PREVIEW_SIGNING_SECRET=<at least 32 bytes>
 ```
 
 Obtain disposable local values with `npx supabase status`. Do not copy local
-defaults into source control. Both variables deliberately lack a `NEXT_PUBLIC_`
+defaults into source control. All three variables deliberately lack a `NEXT_PUBLIC_`
 prefix, and browser components never import the Supabase client.
 
-The application neither recognizes nor requires a service-role credential.
+The preview secret is a server-only application HMAC key. It is never sent to
+PostgreSQL and is read only when a review is created or verified. The
+application neither recognizes nor requires a service-role credential.
 Missing or malformed configuration produces a safe setup state rather than a
 canonical-data fallback.
 
@@ -135,11 +142,61 @@ Deferred constraint triggers validate cross-row or stage-aware rules that cannot
 
 Source slots are retained after resolution. A null home/away country with a source slot hydrates an unresolved slot. Once the source resolves, the country may be populated while the source slot remains; validation requires the two facts to agree.
 
-## Read-only application security
+## Application security
 
-`anon` and `authenticated` receive `SELECT` only on public canonical tables. Neither role receives `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`, including authenticated users recognized as administrators. RLS contains public read policies and no canonical write policies. Application roles have no application-schema sequence privileges, no private-table privileges, and no function execution privilege except the authenticated administrator boolean helper. Default privileges keep future application-schema objects closed until explicitly reviewed and granted.
+`anon` and `authenticated` receive `SELECT` only on public canonical tables.
+Neither role receives `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`, including
+authenticated users recognized as administrators. RLS contains public read
+policies and no canonical write policies. Application roles have no
+application-schema sequence privileges or private-table privileges. Function
+execution is explicitly limited to the public snapshot reader, the private
+administrator predicate, and the two reviewed administrator RPCs. Default
+privileges keep future application-schema objects closed until explicitly
+reviewed and granted.
 
-`private.is_tournament_administrator()` is a narrowly scoped `SECURITY DEFINER` helper that checks `auth.uid()` against `private.administrator_allowlist`. It grants no mutation capability. A later milestone will introduce one reviewed transactional mutation function that authorizes, checks revision, validates, applies the complete batch, records audit history, increments revision, and rolls back atomically.
+`private.is_tournament_administrator()` is a narrowly scoped `SECURITY DEFINER`
+helper that checks `auth.uid()` against `private.administrator_allowlist`.
+`public.read_administration_context(text)` returns the canonical snapshot and
+persistence revision only to an allowlisted authenticated user.
+
+`public.apply_administration_change(text,bigint,uuid,jsonb,text)` is the
+only application write operation. It locks the tournament revision, detects
+idempotent replay, strictly parses the existing administration command model,
+propagates source slots, forces deferred validation, advances the revision, and
+records the change set and complete before/after audit rows in one transaction.
+It is a hardened `SECURITY DEFINER` function executable only by
+`authenticated`; direct canonical DML remains denied.
+
+The server application enforces the two-step signed preview through one
+load–verify–apply coordinator. Database revision and
+`tournament.lastUpdatedAt` are persistence-managed operational values and are
+deliberately excluded from the reviewed business-result identity;
+`lastUpdatedAt` is set from database time only for a successful new mutation.
+All other canonical fields, commands, proposal/result identities, summary, and
+affected-data fields are recomputed and compared before applying.
+
+Group-override entry IDs are canonical JSON-array text derived from the
+persisted logical key `(override set, tournament, group, country)`. Rank is a
+mutable value rather than identity. Both review construction and database
+snapshot hydration order entries by rank, then country and entry ID using
+JavaScript code-unit ordering, so a reviewed override round-trips without
+normalizing away business data.
+
+Before canonical DML, the apply RPC builds a projected tournament-match view of
+the complete command batch. Read-only semantic preflight validates group
+membership and override completeness, source topology and resolved countries,
+fixture/result stage rules, duplicate schedule identities, downstream completed
+results, and the explicit same-match command matrix. Constraints and deferred
+validation remain a second line of defense after this command boundary.
+
+An already authenticated and UUID-allowlisted administrator who deliberately
+invokes the apply RPC directly can bypass the application preview screen. This
+is an accepted limitation for this private, single-administrator application:
+the server proves the two-step preview, while PostgreSQL still enforces
+authentication, UUID allowlisting, strict command validation, revision locking,
+UUID-scoped idempotency, canonical constraints, atomic rollback, source-slot
+propagation, and audit attribution. The RPC does not claim that a human viewed
+the preview, and no service-role credential is used.
 
 Do not authorize using browser-side email checks and do not expose a service-role key to the application.
 
@@ -158,7 +215,15 @@ The active allowlist has a restrictive `auth.users` foreign key. Historical `act
 
 ## Audit boundary
 
-`private.administration_change_sets` and `private.audit_log` are private, indexed, and append-only: updates, deletes, and truncation are rejected. They support future reviewed transactions but are not automatically populated in Milestone 5. Because application roles cannot mutate canonical tables directly and no mutation function exists yet, this milestone does not claim automatic canonical auditing.
+`private.administration_change_sets` and `private.audit_log` are private,
+indexed, and append-only: updates, deletes, and truncation are rejected. The
+Milestone 7A apply RPC populates both automatically and attributes every record
+to `auth.uid()`. Its caller-supplied change-set UUID is the idempotency key;
+identical replay returns the original revision while conflicting reuse is
+rejected. Uses of one change-set UUID are serialized by a transaction-scoped
+advisory lock before lookup, including reuse across different tournaments.
+Audit entity identities use canonical JSON-array text rather than delimiter
+concatenation, so arbitrary identifier content cannot collide.
 
 ## Seeds
 
