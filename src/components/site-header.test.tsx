@@ -27,6 +27,7 @@ describe("SiteHeader recoverable data failures", () => {
     const html = renderToStaticMarkup(await SiteHeader());
     expect(html).toContain("Fantasy World Cup");
     expect(html).toContain("Primary navigation");
+    expect(html).toContain("Open primary navigation");
     expect(html).not.toContain("internal detail");
     expect(html).not.toContain("temporarily unavailable");
   });

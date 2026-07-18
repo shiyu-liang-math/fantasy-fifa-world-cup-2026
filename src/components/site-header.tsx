@@ -1,10 +1,8 @@
 import Link from "next/link";
 
-import { publicNavigation } from "@/config/routes";
 import { createPublicTournamentRepository } from "@/repositories/public-tournament-repository";
 import { getDashboardPageModel } from "@/services/page-models/dashboard";
-import { NavLink } from "./nav-link";
-import { TeamsMenu } from "./teams-menu";
+import { ResponsiveNavigation } from "./responsive-navigation";
 
 export async function SiteHeader() {
   const result = await getDashboardPageModel(
@@ -13,8 +11,8 @@ export async function SiteHeader() {
   const participants = "data" in result ? result.data.participants : [];
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
-        <Link className="flex items-center gap-3 rounded-md" href="/">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
+        <Link className="flex min-w-0 items-center gap-3 rounded-md" href="/">
           <span
             aria-hidden="true"
             className="grid size-9 place-items-center rounded-full bg-brand-500 text-sm font-black text-white"
@@ -30,18 +28,7 @@ export async function SiteHeader() {
             </span>
           </span>
         </Link>
-        <nav aria-label="Primary navigation" className="w-full lg:w-auto">
-          <ul className="flex flex-wrap items-center justify-end gap-1 overflow-visible text-sm">
-            {publicNavigation.map((route) => (
-              <li key={route.href}>
-                <NavLink href={route.href}>{route.label}</NavLink>
-              </li>
-            ))}
-            <li>
-              <TeamsMenu participants={participants} />
-            </li>
-          </ul>
-        </nav>
+        <ResponsiveNavigation participants={participants} />
       </div>
     </header>
   );

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 
 import { SiteHeader } from "@/components/site-header";
 
@@ -37,6 +38,7 @@ export default function RootLayout({
             <p>Official tournament data is added only when it is available.</p>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
